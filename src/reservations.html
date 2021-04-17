@@ -20,7 +20,7 @@
                     <a class="nav-link" aria-current="page" href="index.html">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="reservations.html">Reservations</a>
+                    <a class="nav-link disabled" href="reservations.html">Reservations</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="gallery.html">Gallery</a>
@@ -32,7 +32,7 @@
                     <a class="nav-link" href="contact.html">Contacts</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled" href="login.html">Login</a>
+                    <a class="nav-link" href="login.html">Login</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="account%20details.html"><img src="profile.png" width="30px" height="30px"></a>
@@ -42,24 +42,29 @@
     </nav>
 </header>
 <div style="padding-left: 30px">
-    <div style="padding-top: 30px">
-       <h3 align="left">
-           Login
-       </h3>
-    </div>
-<div style="padding-right: 1600px" class="form-floating mb-3">
-    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-    <label for="floatingInput">Email address</label>
-</div>
-<div style="padding-right: 1600px" class="form-floating">
-    <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-    <label for="floatingPassword">Password</label>
-</div>
-    <div style="padding-top: 10px">
-        <a href="account%20details.html">
-        <button type="button" class="btn btn-outline-primary">Login</button>
-    </div>
 
+</div>
+<div style="padding-left: 30px">
+    <div style="padding-top: 70px">
+        <h3 style="text-align:center;">
+            Reservations
+        </h3>
+    </div>
+    <div class="row">
+        <div class="column-4" style="padding-right: 1720px">
+            <div class="list-group">
+                <a href="account%20details.html" class="list-group-item list-group-item-action">Account Details</a>
+                <a href="change%20password.html" class="list-group-item list-group-item-action">Change Password</a>
+                <a href="reservations.html" class="list-group-item list-group-item-action active" aria-current="true">
+                    Reservations
+                </a>
+                <a href="review.html" class="list-group-item list-group-item-action">Reviews</a>
+            </div>
+        </div>
+        <div class="column-4" style="padding-right: 1600px">
+
+        </div>
+    </div>
 
 </div>
 </body>
