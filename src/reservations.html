@@ -51,7 +51,7 @@
         </h3>
     </div>
     <div class="row">
-        <div class="column-4" style="padding-right: 1720px">
+        <div class="col-6" style="width:840px;padding-right: 650px">
             <div class="list-group">
                 <a href="account%20details.html" class="list-group-item list-group-item-action">Account Details</a>
                 <a href="change%20password.html" class="list-group-item list-group-item-action">Change Password</a>
@@ -61,8 +61,95 @@
                 <a href="review.html" class="list-group-item list-group-item-action">Reviews</a>
             </div>
         </div>
-        <div class="column-4" style="padding-right: 1600px">
+        <div class="col-6" style="padding-right: 500px">
+            <div class="col"  style="border: 1px solid;overflow:auto;overflow-x:hidden; height:500px;padding: 10px">
+                <div class = "row">
+                    <div class="col-5">
+                        <img src="hotel%20room.jpg" width="160px" height="200px">
+                    </div>
+                    <div class="col-7">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col">Details</th>
+                                <th scope="col"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th scope="row">Check-in Date</th>
+                                <td>20.04.2021</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Check-out Date</th>
+                                <td>27.04.2021</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Room Type</th>
+                                <td colspan="2">VIP Room</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Price</th>
+                                <td colspan="2">1000 TRY</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Button trigger modal -->
+                    <div class="row">
+                    <div class="col-3">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Extend
+                    </button>
 
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Warning!</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <label for="dateInp2" class="form-label">New Check-out Date</label>
+                                    <input type="date" class="form-control" id="dateInp2">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <a class="btn btn-primary" href="reservations.html" role="button">Extend </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                        <div class="col">
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                Cancel
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="staticBackdropLabel">Warning!</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Do you want to cancel your reservation?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <a class="btn btn-primary" href="reservations.html" role="button">Continue</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
