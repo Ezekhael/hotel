@@ -32,7 +32,7 @@
                     <a class="nav-link" href="contact.html">Contacts</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="login.html">Login</a>
+                    <a class="nav-link" href="login.php">Login</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="account%20details.html"><img src="profile.png" width="30px" height="30px"></a>
@@ -41,39 +41,114 @@
         </div>
     </nav>
 </header>
+<?php
+$validate=true;
+$error = $email = $password = $name = $surname = $phone = $emailerror = $passworderror = $cfpassworderror = $nameerror = $phoneerror = $surnameerror = "";
+if ($_SERVER["REQUEST_METHOD"] == "POST")  {
+
+    if (empty($_POST["email"])) {
+        $emailerror = "Email is required";
+        $validate=false;
+    } else {
+        $email = test_input($_POST["email"]);
+    }
+    if (empty($_POST["password"])) {
+        $passworderror = "Password is required";
+        $validate=false;
+    } else {
+        $password = test_input($_POST["password"]);
+    }
+    if (empty($_POST["cfpassword"])) {
+        $cfpassworderror = "Password is required";
+        $validate=false;
+    } else {
+        $cfpassword = test_input($_POST["cfpassword"]);
+    }
+    if (empty($_POST["name"])) {
+        $nameerror = "Name is required";
+        $validate=false;
+    } else {
+        $name = test_input($_POST["name"]);
+    }
+    if (empty($_POST["surname"])) {
+        $surnameerror = "Password is required";
+        $validate=false;
+    } else {
+        $surname = test_input($_POST["surname"]);
+    }
+    if (empty($_POST["phone"])) {
+        $phoneerror = "Phone Number is required";
+        $validate=false;
+    } else {
+        $phone = test_input($_POST["phone"]);
+    }
+
+
+    if ($validate){
+      header("Location:login.php");
+    }
+}
+function test_input($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
+?>
+
+
 <div style="padding-left: 30px">
     <div style="padding-top: 30px">
         <h3 align="left">
             Sign Up
         </h3>
     </div>
+    <div>
+        <form action="<?php echo $_SERVER["PHP_SELF"]?>" method="POST">
     <div style="padding-right: 1600px;padding-top: 10px" class="form-floating">
+        <input name="name" type="text" class="form-control" placeholder="Bahadır Enes">
+        <?php
+        echo $nameerror;
+        ?>
         <label  class="form-label">Name</label>
-        <input type="text" class="form-control" placeholder="Bahadır Enes">
     </div>
     <div style="padding-right: 1600px;padding-top: 10px" class="form-floating">
+        <input name="surname" type="text" class="form-control" placeholder="AY">
+        <?php
+        echo $surnameerror;
+        ?>
         <label  class="form-label">Surname</label>
-        <input type="text" class="form-control" placeholder="AY">
     </div>
     <div style="padding-right: 1600px;padding-top: 10px" class="form-floating">
+        <input name="phone" type="phone" class="form-control" placeholder="5555555555">
+        <?php
+        echo $phoneerror;
+        ?>
         <label  class="form-label">Phone Number</label>
-        <input type="phone" class="form-control" placeholder="5555555555">
     </div>
     <div style="padding-right: 1600px;padding-top: 10px" class="form-floating">
-        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+        <input name="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+        <?php
+        echo $emailerror;
+        ?>
         <label for="floatingInput">Email address</label>
     </div>
     <div style="padding-right: 1600px;padding-top: 10px" class="form-floating">
-        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+        <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
+        <?php
+        echo $passworderror;
+        ?>
         <label for="floatingPassword">Password</label>
     </div>
     <div style="padding-right: 1600px;padding-top: 10px" class="form-floating">
-        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+        <input name="cfpassword" type="password" class="form-control" id="floatingPassword" placeholder="Password">
+        <?php
+        echo $cfpassworderror;
+        ?>
         <label for="floatingPassword">Confirm Password</label>
     </div>
-    <div style="padding-top: 10px">
-        <a href="login.html">
-            <button type="button" class="btn btn-outline-primary">Sign Up</button>
+            <input class="btn btn-primary" style="margin-top: 10px" type="submit">
+        </form>
     </div>
 
 
