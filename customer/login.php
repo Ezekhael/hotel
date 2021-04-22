@@ -46,8 +46,8 @@
     $error = $email = $password = $emailerror = $passworderror = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST")  {
 
-    if (empty($_POST["email"])) {
-        $emailerror = "Email is required";
+    if (empty($_POST["email"]) || filter_var($email, FILTER_VALIDATE_EMAIL) == false) {
+        $emailerror = "Valid email is required";
         $validate=false;
     } else {
         $email = test_input($_POST["email"]);

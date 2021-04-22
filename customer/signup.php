@@ -46,8 +46,8 @@ $validate=true;
 $error = $email = $password = $name = $surname = $phone = $emailerror = $passworderror = $cfpassworderror = $nameerror = $phoneerror = $surnameerror = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST")  {
 
-    if (empty($_POST["email"])) {
-        $emailerror = "Email is required";
+    if (empty($_POST["email"]) || filter_var($email, FILTER_VALIDATE_EMAIL) == false) {
+        $emailerror = "Valid email is required";
         $validate=false;
     } else {
         $email = test_input($_POST["email"]);
@@ -71,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")  {
         $name = test_input($_POST["name"]);
     }
     if (empty($_POST["surname"])) {
-        $surnameerror = "Password is required";
+        $surnameerror = "Surname is required";
         $validate=false;
     } else {
         $surname = test_input($_POST["surname"]);
