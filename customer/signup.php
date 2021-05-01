@@ -43,7 +43,7 @@
 </header>
 <?php
 $validate=true;
-$error = $email = $password = $name = $surname = $phone = $emailerror = $passworderror = $cfpassworderror = $nameerror = $phoneerror = $surnameerror = "";
+$error = $email = $password = $cfpassword = $name = $surname = $phone = $emailerror = $passworderror = $cfpassworderror = $nameerror = $phoneerror = $confirmationerror = $surnameerror = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST")  {
 
     if (empty($_POST["email"]) || filter_var($email, FILTER_VALIDATE_EMAIL) == false) {
@@ -82,6 +82,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")  {
     } else {
         $phone = test_input($_POST["phone"]);
     }
+    if ($password != $cfpassword) {
+    $confirmationerror = "Passwords are not same";
+    $validate=false;
+    }
+
+
 
 
     if ($validate){
@@ -136,14 +142,21 @@ function test_input($data) {
     <div style="padding-right: 1600px;padding-top: 10px" class="form-floating">
         <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
         <?php
-        echo $passworderror;
+        echo $passworderror . "<br>";
+        ?>
+        <?php
+        echo $confirmationerror;
         ?>
         <label for="floatingPassword">Password</label>
     </div>
     <div style="padding-right: 1600px;padding-top: 10px" class="form-floating">
         <input name="cfpassword" type="password" class="form-control" id="floatingPassword" placeholder="Password">
         <?php
-        echo $cfpassworderror;
+        echo $cfpassworderror . "<br>";
+        ?>
+
+        <?php
+        echo $confirmationerror;
         ?>
         <label for="floatingPassword">Confirm Password</label>
     </div>
