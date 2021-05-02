@@ -32,7 +32,7 @@
                     <a class="nav-link" href="contact.html">Contacts</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="allcomments.html.html">Comments</a>
+                    <a class="nav-link" href="allcomments.html">Comments</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link disabled" href="login.php">Login</a>
