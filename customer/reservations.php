@@ -14,25 +14,25 @@
 <header class="header">
     <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
-            <a href="index.html" class="navbar-brand">Hotel California</a>
+            <a href="index.php" class="navbar-brand">Hotel California</a>
             <ul class="nav justify-content-end">
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="index.html">Home</a>
+                    <a class="nav-link" aria-current="page" href="index.php">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled" href="reservations.html">Reservations</a>
+                    <a class="nav-link disabled" href="reservations.php">Reservations</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="gallery.html">Gallery</a>
+                    <a class="nav-link" href="gallery.php">Gallery</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="rooms.html">Rooms</a>
+                    <a class="nav-link" href="rooms.php">Rooms</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="contact.html">Contacts</a>
+                    <a class="nav-link" href="contact.php">Contacts</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="allcomments.html">Comments</a>
+                    <a class="nav-link" href="allcomments.php">Comments</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="login.php">Login</a>
@@ -58,10 +58,10 @@
             <div class="list-group">
                 <a href="account%20details.html" class="list-group-item list-group-item-action">Account Details</a>
                 <a href="change%20password.html" class="list-group-item list-group-item-action">Change Password</a>
-                <a href="reservations.html" class="list-group-item list-group-item-action active" aria-current="true">
+                <a href="reservations.php" class="list-group-item list-group-item-action active" aria-current="true">
                     Reservations
                 </a>
-                <a href="review.html" class="list-group-item list-group-item-action">Reviews</a>
+                <a href="review.php" class="list-group-item list-group-item-action">Reviews</a>
             </div>
         </div>
         <div class="col-6" style="padding-right: 500px">
@@ -119,7 +119,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <a class="btn btn-primary" href="reservations.html" role="button">Extend </a>
+                                    <a class="btn btn-primary" href="reservations.php" role="button">Extend </a>
                                 </div>
                             </div>
                         </div>
@@ -144,7 +144,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <a class="btn btn-primary" href="reservations.html" role="button">Continue</a>
+                                            <a class="btn btn-primary" href="reservations.php" role="button">Continue</a>
                                         </div>
                                     </div>
                                 </div>

@@ -1,3 +1,13 @@
+<?php
+session_start();
+include("server.php");
+
+if(isset($_SESSION["email"])) {
+    header("Location: accountdetails.php");
+    exit();
+}
+
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -12,44 +22,16 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 <header class="header">
-    <nav class="navbar navbar-light bg-light">
-        <div class="container-fluid">
-            <a href="index.html" class="navbar-brand">Hotel California</a>
-            <ul class="nav justify-content-end">
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="index.html">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="reservations.html">Reservations</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="gallery.html">Gallery</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="rooms.html">Rooms</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="contact.html">Contacts</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="allcomments.html">Comments</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="login.php">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="account%20details.html"><img src="profile.png" width="30px" height="30px"></a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    <?php
+    include("header.php");
+    ?>
 </header>
 <?php
     $validate=true;
     $error = $email = $password = $emailerror = $passworderror = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST")  {
 
-    if (empty($_POST["email"]) || filter_var($email, FILTER_VALIDATE_EMAIL) == false) {
+    if (empty($_POST["email"])) {
         $emailerror = "Valid email is required";
         $validate=false;
     } else {
@@ -62,13 +44,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")  {
         $password = test_input($_POST["password"]);
     }
 
+    $check = $db -> query("SELECT * FROM user WHERE email = '$email'");
+    $userfound = $check -> fetch_assoc();
+    echo($db->error);
 
-    if ($validate){
-    if ($email =='enes@gmail.com' AND $password=='12345') {
-        header("Location:account%20details.html");
-    } else {
-        $error = "Wrong Email or Password Try Again";
-    }
+    if ($validate) {
+        if ($userfound != null) {
+
+            if ($password == $userfound['password']) {
+                $_SESSION['name'] = $userfound['name'];
+                $_SESSION['surname'] = $userfound['surname'];
+                $_SESSION['email'] = $userfound['email'];
+                $_SESSION['phone'] = $userfound['phone'];
+               header("Location:accountdetails.php");
+
+            } else {
+                $error = "Wrong Email or Password Try Again";
+            }
+        } else {
+            $error = "Wrong Email or Password Try Again";
+        }
     }
 }
 function test_input($data) {

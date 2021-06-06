@@ -1,3 +1,8 @@
+<?php
+session_start();
+include("server.php");
+
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -14,31 +19,34 @@
 <header class="header">
     <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
-            <a href="index.html" class="navbar-brand">Hotel California</a>
+            <a href="index.php" class="navbar-brand">Hotel California</a>
             <ul class="nav justify-content-end">
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="index.html">Home</a>
+                    <a class="nav-link" aria-current="page" href="index.php">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="reservations.html">Reservations</a>
+                    <a class="nav-link" href="reservations.php">Reservations</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="gallery.html">Gallery</a>
+                    <a class="nav-link" href="gallery.php">Gallery</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="rooms.html">Rooms</a>
+                    <a class="nav-link" href="rooms.php">Rooms</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="contact.html">Contacts</a>
+                    <a class="nav-link" href="contact.php">Contacts</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="allcomments.html">Comments</a>
+                    <a class="nav-link" href="allcomments.php">Comments</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="login.php">Login</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="account%20details.html"><img src="profile.png" width="30px" height="30px"></a>
+                    <a class="nav-link " href="logout.php">Logout</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="accountdetails.php"><img src="profile.png" width="30px" height="30px"></a>
                 </li>
             </ul>
         </div>
@@ -60,33 +68,33 @@
                     Account Details
                 </a>
                 <a href="change%20password.html" class="list-group-item list-group-item-action">Change Password</a>
-                <a href="reservations.html" class="list-group-item list-group-item-action">Reservations</a>
-                <a href="review.html" class="list-group-item list-group-item-action">Reviews</a>
+                <a href="reservations.php" class="list-group-item list-group-item-action">Reservations</a>
+                <a href="review.php" class="list-group-item list-group-item-action">Reviews</a>
             </div>
         </div>
         <div class="col-6" align="left" style="padding-right: 500px">
             <div class="row" style="padding-right: 100px;padding-top: 30px">
                 <div class="mb-3">
                     <label  class="form-label">Name</label>
-                    <input type="text" class="form-control" placeholder="Bahadır Enes">
+                    <input type="text" class="form-control" value="<?php echo($_SESSION['name'])?>">
                 </div>
             </div>
             <div class="row" style="padding-right: 100px;padding-top: 30px">
                 <div class="mb-3">
                     <label  class="form-label">Surname</label>
-                    <input type="text" class="form-control" placeholder="AY">
+                    <input type="text" class="form-control" value="<?php echo($_SESSION['surname'])?>">
                 </div>
             </div>
             <div class="row" style="padding-right: 100px;padding-top: 30px">
                 <div class="mb-3">
                     <label  class="form-label">E-mail</label>
-                    <input type="email" class="form-control" placeholder="example@gmail.com">
+                    <input type="email" class="form-control" value="<?php echo($_SESSION['email'])?>">
                 </div>
             </div>
             <div class="row" style="padding-right: 100px;padding-top: 30px">
                 <div class="mb-3">
                     <label  class="form-label">Phone Number</label>
-                    <input type="phone" class="form-control" placeholder="5555555555">
+                    <input type="phone" class="form-control" value="<?php echo($_SESSION['phone'])?>">
                 </div>
             </div>
             <div class="row" style="padding-right: 100px;padding-top: 30px">

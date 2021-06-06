@@ -1,3 +1,7 @@
+<?php
+session_start();
+include("server.php");
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -12,41 +16,22 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 <header class="header">
-    <nav class="navbar navbar-light bg-light">
-        <div class="container-fluid">
-            <a href="index.html" class="navbar-brand">Hotel California</a>
-            <ul class="nav justify-content-end">
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="index.html">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="reservations.html">Reservations</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="gallery.html">Gallery</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="rooms.html">Rooms</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="contact.html">Contacts</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="allcomments.html">Comments</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="login.php">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="account%20details.html"><img src="profile.png" width="30px" height="30px"></a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    <?php
+    include("header.php");
+    ?>
 </header>
 <div style="padding-left: 30px">
 
 </div>
+<?php
+$name = $surname = $email = $phone = "";
+if(isset($_SESSION['email'])) {
+    $name = $_SESSION['name'];
+    $surname = $_SESSION['surname'];
+    $email = $_SESSION['email'];
+    $phone = $_SESSION['phone'];
+}
+?>
 <div style="padding-left: 30px">
     <div style="padding-top: 25px">
     <h3>
@@ -58,13 +43,13 @@
         <div class="row" style="padding-right: 100px;padding-top: 30px">
             <div class="mb-3">
                 <label  class="form-label">Name</label>
-                <input type="text" class="form-control" placeholder="Bahadır Enes">
+                <input type="text" class="form-control" value="<?php echo $name?>">
             </div>
         </div>
         <div class="row" style="padding-right: 100px;padding-top: 30px">
             <div class="mb-3">
                 <label  class="form-label">Surname</label>
-                <input type="text" class="form-control" placeholder="AY">
+                <input type="text" class="form-control" value="<?php echo $surname?>">
             </div>
         </div>
         <div class="row" style="padding-right: 100px;padding-top: 30px">
@@ -84,13 +69,13 @@
         <div class="row" style="padding-right: 100px;padding-top: 30px">
             <div class="mb-3">
                 <label  class="form-label">Phone Number</label>
-                <input type="phone" class="form-control" placeholder="5555555555">
+                <input type="phone" class="form-control" value="<?php echo $phone?>">
             </div>
         </div>
         <div class="row" style="padding-right: 100px;padding-top: 30px">
             <div class="mb-3">
                 <label  class="form-label">E-mail</label>
-                <input type="email" class="form-control" placeholder="example@gmail.com">
+                <input type="email" class="form-control" value="<?php echo $email?>">
             </div>
         </div>
         <div class="row" style="padding-right: 100px;padding-top: 30px">
@@ -132,11 +117,11 @@
                 <tbody>
                 <tr>
                     <th scope="row">Check-in Date</th>
-                    <td>20.04.2021</td>
+                    <td>15.06.2021</td>
                 </tr>
                 <tr>
                     <th scope="row">Check-out Date</th>
-                    <td>27.04.2021</td>
+                    <td>20.06.2021</td>
                 </tr>
                 <tr>
                     <th scope="row">Room Type</th>
@@ -168,7 +153,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <a class="btn btn-primary" href="reservations.html" role="button">Continue</a>
+                            <a class="btn btn-primary" href="reservations.php" role="button">Continue</a>
                         </div>
                     </div>
                 </div>

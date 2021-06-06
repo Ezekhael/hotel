@@ -14,25 +14,25 @@
 <header class="header">
     <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
-            <a href="index.html" class="navbar-brand">Hotel California</a>
+            <a href="index.php" class="navbar-brand">Hotel California</a>
             <ul class="nav justify-content-end">
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="index.html">Home</a>
+                    <a class="nav-link" aria-current="page" href="index.php">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="reservations.html">Reservations</a>
+                    <a class="nav-link" href="reservations.php">Reservations</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="gallery.html">Gallery</a>
+                    <a class="nav-link" href="gallery.php">Gallery</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled" href="rooms.html">Rooms</a>
+                    <a class="nav-link disabled" href="rooms.php">Rooms</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="contact.html">Contacts</a>
+                    <a class="nav-link" href="contact.php">Contacts</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="allcomments.html">Comments</a>
+                    <a class="nav-link" href="allcomments.php">Comments</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="login.php">Login</a>
@@ -67,7 +67,7 @@
                 <p style="font-size:12px">-Study Desk</p>
             </div>
             <div>
-                <a class="btn btn-primary" href="booking.html" role="button">Book Now</a>
+                <a class="btn btn-primary" href="booking.php" role="button">Book Now</a>
             </div>
         </div>
         <div class="col-3">
@@ -87,7 +87,7 @@
                 <p style="font-size:12px">-Free Wifi</p>
             </div>
             <div>
-                <a class="btn btn-primary" href="booking.html" role="button">Book Now</a>
+                <a class="btn btn-primary" href="booking.php" role="button">Book Now</a>
             </div>
         </div>
         <div class="col-3">
@@ -108,7 +108,7 @@
                 <p style="font-size:12px">-Free Wifi</p>
             </div>
             <div>
-                <a class="btn btn-primary" href="booking.html" role="button">Book Now</a>
+                <a class="btn btn-primary" href="booking.php" role="button">Book Now</a>
             </div>
         </div>
         <div class="col-3">
@@ -130,7 +130,7 @@
                 <p style="font-size:12px">-Terrace</p>
             </div>
             <div>
-                <a class="btn btn-primary" href="booking.html" role="button">Book Now</a>
+                <a class="btn btn-primary" href="booking.php" role="button">Book Now</a>
             </div>
         </div>
     </div>

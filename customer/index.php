@@ -12,37 +12,9 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 <header class="header">
-    <nav class="navbar fixed-top navbar-light bg-light">
-        <div class="container-fluid">
-            <a href="index.html" class="navbar-brand">Hotel California</a>
-            <ul class="nav justify-content-end">
-                <li class="nav-item">
-                    <a class="nav-link disabled" aria-current="page" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="reservations.html">Reservations</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="gallery.html">Gallery</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="rooms.html">Rooms</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="contact.html">Contacts</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="allcomments.html">Comments</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="login.php">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="account%20details.html"><img src="profile.png" width="30px" height="30px"></a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    <?php
+    include("header.php");
+    ?>
 </header>
 <div style="padding-left: 30px">
 
@@ -68,7 +40,7 @@
         <div class="col-4" style="padding-left: 40px"; align="left">
             <div class="row" style="padding-top: 75px; padding-right: 400px">
                 <div class="row">
-                    <a href="rooms.html">
+                    <a href="rooms.php">
                         <button type="button" class="btn btn-primary">VIP Room</button>
                     </a>
                 </div>
@@ -82,7 +54,7 @@
             </div>
             <div class="row" style="padding-top: 120px; padding-right: 350px">
                 <div class="row">
-                    <a href="rooms.html">
+                    <a href="rooms.php">
                         <button type="button" class="btn btn-primary">Family Room</button>
                     </a>
                 </div>
@@ -96,7 +68,7 @@
             </div>
             <div class="row" style="padding-top: 120px; padding-right: 350px">
                 <div class="row">
-                    <a href="rooms.html">
+                    <a href="rooms.php">
                         <button type="button" class="btn btn-primary">Double Room</button>
                     </a>
                 </div>
@@ -110,7 +82,7 @@
             </div>
             <div class="row" style="padding-top: 120px; padding-right: 400px">
                 <div class="row">
-                    <a href="rooms.html">
+                    <a href="rooms.php">
                         <button type="button" class="btn btn-primary">Single Room</button>
                     </a>
                 </div>
@@ -153,7 +125,7 @@
                 <input type="date" class="form-control" id="dateInp2">
             </div>
             <div class="row" style="padding-top:220px;padding-right:95px">
-                <a href="booking.html">
+                <a href="search.php">
                     <button type="button" class="btn btn-dark ">Book Now</button>
                 </a>
             </div>

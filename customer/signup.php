@@ -1,3 +1,8 @@
+<?php
+session_start();
+include("server.php");
+
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -12,37 +17,9 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 <header class="header">
-    <nav class="navbar navbar-light bg-light">
-        <div class="container-fluid">
-            <a href="index.html" class="navbar-brand">Hotel California</a>
-            <ul class="nav justify-content-end">
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="index.html">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="reservations.html">Reservations</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="gallery.html">Gallery</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="rooms.html">Rooms</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="contact.html">Contacts</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="allcomments.html">Comments</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="login.php">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="account%20details.html"><img src="profile.png" width="30px" height="30px"></a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    <?php
+    include("header.php");
+    ?>
 </header>
 <?php
 $validate=true;
@@ -102,6 +79,31 @@ function test_input($data) {
     $data = stripslashes($data);
     $data = htmlspecialchars($data);
     return $data;
+}
+?>
+<?php
+if(!empty($_POST["name"] && $_POST["surname"] && $_POST["email"] && $_POST["phone"] &&
+    $_POST["password"] && $_POST["cfpassword"])){
+
+
+    if(isset($_POST["name"],$_POST["surname"],$_POST["email"],$_POST["phone"],
+        $_POST["password"],$_POST["cfpassword"])){
+
+        $name = $_POST["name"];
+        $surname = $_POST["surname"];
+        $email = $_POST["email"];
+        $phoneNumber = $_POST["phone"];
+        $password = $_POST["password"];
+        $password = md5($password);
+        $passwordAgain = $_POST["cfpassword"];
+
+
+        $add = $db -> query("INSERT INTO user(name, surname, phone, email, password) 
+                VALUES ('".$name."','".$surname."','".$phoneNumber."','".$email."','".$password."')");
+
+
+
+    }
 }
 ?>
 
