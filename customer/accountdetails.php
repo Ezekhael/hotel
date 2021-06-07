@@ -138,7 +138,7 @@ if(!isset($_SESSION["email"])) {
 
             $query_run = mysqli_query($db,$query);
             $get = $query_run -> fetch_assoc();
-
+            //you cannot see the changes in profile until you logout and login again
             if($get)
             {
                 echo '<script type="text/javascript">alert("User information is updated successfully")</script>';

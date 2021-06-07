@@ -1,9 +1,6 @@
 <?php
 session_start();
 include("server.php");
-$password="";
-$npassword="";
-$cfpassword="";
 
 if(!isset($_SESSION["email"])) {
     header("Location: login.php");
@@ -53,15 +50,15 @@ if(!isset($_SESSION["email"])) {
             <form action="" method="POST">
             <div class="row" style="padding-right: 500px;padding-top: 20px" class="form-floating">
                 <label for="floatingPassword">Current Password</label>
-                <input type="password" class="form-control" id="floatingPassword" placeholder="Current Password" value="">
+                <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Current Password" value="">
             </div>
             <div class="row" style="padding-right: 500px;padding-top: 20px" class="form-floating">
                 <label for="floatingPassword">New Password</label>
-                <input type="password" class="form-control" id="floatingPassword" placeholder="New Password" value="">
+                <input type="password" name="npassword" class="form-control" id="floatingPassword" placeholder="New Password" value="">
             </div>
             <div class="row" style="padding-right: 500px;padding-top: 20px" class="form-floating">
                 <label for="floatingPassword">New Password Confirmation</label>
-                <input type="password" class="form-control" id="floatingPassword" placeholder="New Password" value="">
+                <input type="password" name="cfpassword" class="form-control" id="floatingPassword" placeholder="New Password" value="">
 
             </div>
             <div class="row" style="padding-right: 100px;padding-top: 30px">
@@ -75,41 +72,35 @@ if(!isset($_SESSION["email"])) {
     <?php
     if(isset($_POST['save']))
     {
+
+        $password = $_POST['password']; //current password
+        $npassword = $_POST['npassword']; //new password
+        $cfpassword = $_POST['cfpassword']; //confirmation of new password
+
         //echo '<script type="text/javascript">alert("Update Clicked")</script>';
-        if(empty($password || $npassword || $cfpassword))
+        if(empty($password) && empty($npassword) && empty($cfpassword))
         {
             echo '<script type="text/javascript">alert("Enter Data in All fields")</script>';
         }
         else
         {
-            $password = $_POST['password']; //current password
-            $npassword = $_POST['npassword']; //new password
-            $cfpassword = $_POST['cfpassword']; //confirmation of new password
+
 
             $check = $db -> query("SELECT * FROM user WHERE email='".$_SESSION["email"]."'");
             $userfound = $check -> fetch_assoc();
 
             if($password == $userfound['password'] && $npassword == $cfpassword){
 
-                $query = "UPDATE user SET password='$npassword' where email='".$_SESSION["email"]."'";
+                $pw = $db -> query("UPDATE user SET password='$npassword' where email='".$_SESSION["email"]."'");
 
-                $query_run = mysqli_query($db,$query);
-                $pw = $query_run -> fetch_assoc();
+                if($pw)
+                {
+                    echo '<script type="text/javascript">alert("Password Updated successfully")</script>';
+                }
+                else{
+                    echo '<script type="text/javascript">alert("Passwords does not match")</script>';
+                }
             }
-            else {
-                echo '<script type="text/javascript">alert("")</script>';
-            }
-
-
-
-            if($pw)
-            {
-                echo '<script type="text/javascript">alert("Product Updated successfully")</script>';
-            }
-            else{
-                echo '<script type="text/javascript">alert("Error")</script>';
-            }
-
         }
     }
     ?>
