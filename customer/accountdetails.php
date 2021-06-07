@@ -1,7 +1,15 @@
 <?php
 session_start();
 include("server.php");
+$name="";
+$surname="";
+$email="";
+$phone="";
 
+if(!isset($_SESSION["email"])) {
+    header("Location: login.php");
+    exit();
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -62,49 +70,86 @@ include("server.php");
         </h3>
     </div>
     <div class="row">
-        <div class="col-6" style="width:840px;padding-right: 600px">
+        <div class="col-6" style="width:840px;padding-right: 600px;padding-bottom: 60px">
             <div class="list-group">
-                <a href="account%20details.html" class="list-group-item list-group-item-action active" aria-current="true">
+                <a href="accountdetails.php" class="list-group-item list-group-item-action active" aria-current="true">
                     Account Details
                 </a>
-                <a href="change%20password.html" class="list-group-item list-group-item-action">Change Password</a>
+                <a href="change%20password.php" class="list-group-item list-group-item-action">Change Password</a>
                 <a href="reservations.php" class="list-group-item list-group-item-action">Reservations</a>
                 <a href="review.php" class="list-group-item list-group-item-action">Reviews</a>
             </div>
         </div>
-        <div class="col-6" align="left" style="padding-right: 500px">
-            <div class="row" style="padding-right: 100px;padding-top: 30px">
-                <div class="mb-3">
-                    <label  class="form-label">Name</label>
-                    <input type="text" class="form-control" value="<?php echo($_SESSION['name'])?>">
-                </div>
-            </div>
-            <div class="row" style="padding-right: 100px;padding-top: 30px">
-                <div class="mb-3">
-                    <label  class="form-label">Surname</label>
-                    <input type="text" class="form-control" value="<?php echo($_SESSION['surname'])?>">
-                </div>
-            </div>
-            <div class="row" style="padding-right: 100px;padding-top: 30px">
-                <div class="mb-3">
-                    <label  class="form-label">E-mail</label>
-                    <input type="email" class="form-control" value="<?php echo($_SESSION['email'])?>">
-                </div>
-            </div>
-            <div class="row" style="padding-right: 100px;padding-top: 30px">
-                <div class="mb-3">
-                    <label  class="form-label">Phone Number</label>
-                    <input type="phone" class="form-control" value="<?php echo($_SESSION['phone'])?>">
-                </div>
-            </div>
-            <div class="row" style="padding-right: 100px;padding-top: 30px">
-                <div class="mb-3">
-                    <button type="button" class="btn btn-success">Save Changes</button>
-                </div>
-            </div>
 
+        <div class="col-6" align="left" style="padding-right: 500px">
+            <form action="" method="POST">
+                <div class="row" style="padding-right: 200px">
+                    <div class="mb-3">
+                        <label  class="form-label">Name</label>
+                        <input type="text" class="form-control" name="name" value="<?php echo($_SESSION['name'])?>">
+                    </div>
+                </div>
+                <div class="row" style="padding-right: 200px">
+                    <div class="mb-3">
+                        <label  class="form-label">Surname</label>
+                        <input type="text" class="form-control" name="surname" value="<?php echo($_SESSION['surname'])?>">
+                    </div>
+                </div>
+                <div class="row" style="padding-right: 200px;">
+                    <div class="mb-3">
+                        <label  class="form-label">E-mail</label>
+                        <input type="text" class="form-control" name="email" value="<?php echo($_SESSION['email'])?>">
+                    </div>
+                </div>
+                <div class="row" style="padding-right: 200px">
+                    <div class="mb-3">
+                        <label  class="form-label">Phone Number</label>
+                        <input type="text" class="form-control" name="phone" value="<?php echo($_SESSION['phone'])?>">
+                    </div>
+                </div>
+                <div class="row" style="padding-right: 100px;padding-top: 30px">
+                    <div class="mb-3">
+                        <button type="submit" name = "save" class="btn btn-success">Save Changes</button>
+                    </div>
+                </div>
+            </form>
         </div>
+
     </div>
+    <?php
+    if(isset($_POST['save']))
+    {
+        //echo '<script type="text/javascript">alert("Update Clicked")</script>';
+        if($_POST['name']=="" || $_POST['surname']=="" || $_POST['email']=="" || $_POST['phone']=="")
+        {
+            echo '<script type="text/javascript">alert("Enter Data in All fields")</script>';
+        }
+        else
+        {
+            $name=$_POST['name'];
+            $surname=$_POST['surname'];
+            $email=$_POST['email'];
+            $phone=$_POST['phone'];
+
+            $query = "UPDATE user
+							SET name='$name',surname='$surname',email='$email',phone='$phone' 
+                            where email='$email'
+							";
+
+            $query_run = mysqli_query($db,$query);
+            $get = $query_run -> fetch_assoc();
+
+            if($get)
+            {
+                echo '<script type="text/javascript">alert("User information is updated successfully")</script>';
+            }
+            else{
+                echo '<script type="text/javascript">alert("User information could not be updated successfully")</script>';
+            }
+
+        }
+    }
+    ?>
 
 </div>
 </body>

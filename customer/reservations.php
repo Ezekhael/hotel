@@ -1,3 +1,12 @@
+<?php
+session_start();
+include("server.php");
+
+if(!isset($_SESSION["email"])) {
+    header("Location: login.php");
+    exit();
+}
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -28,8 +37,8 @@
     <div class="row">
         <div class="col-6" style="width:840px;padding-right: 650px">
             <div class="list-group">
-                <a href="account%20details.html" class="list-group-item list-group-item-action">Account Details</a>
-                <a href="change%20password.html" class="list-group-item list-group-item-action">Change Password</a>
+                <a href="accountdetails.php" class="list-group-item list-group-item-action">Account Details</a>
+                <a href="change%20password.php" class="list-group-item list-group-item-action">Change Password</a>
                 <a href="reservations.php" class="list-group-item list-group-item-action active" aria-current="true">
                     Reservations
                 </a>

@@ -1,3 +1,15 @@
+<?php
+session_start();
+include("server.php");
+$password="";
+$npassword="";
+$cfpassword="";
+
+if(!isset($_SESSION["email"])) {
+    header("Location: login.php");
+    exit();
+}
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -29,8 +41,8 @@
     <div class="row">
         <div class="col-6" style="width:840px;padding-right: 600px">
             <div class="list-group">
-                <a href="account%20details.html" class="list-group-item list-group-item-action">Account Details</a>
-                <a href="change%20password.html" class="list-group-item list-group-item-action active" aria-current="true">
+                <a href="accountdetails.php" class="list-group-item list-group-item-action">Account Details</a>
+                <a href="change%20password.php" class="list-group-item list-group-item-action active" aria-current="true">
                     Change Password
                 </a>
                 <a href="reservations.php" class="list-group-item list-group-item-action">Reservations</a>
@@ -38,27 +50,69 @@
             </div>
         </div>
         <div class="column-6" style="padding-top: 20px;width:800px">
+            <form action="" method="POST">
             <div class="row" style="padding-right: 500px;padding-top: 20px" class="form-floating">
                 <label for="floatingPassword">Current Password</label>
-                <input type="password" class="form-control" id="floatingPassword" placeholder="Current Password">
+                <input type="password" class="form-control" id="floatingPassword" placeholder="Current Password" value="">
             </div>
             <div class="row" style="padding-right: 500px;padding-top: 20px" class="form-floating">
                 <label for="floatingPassword">New Password</label>
-                <input type="password" class="form-control" id="floatingPassword" placeholder="New Password">
+                <input type="password" class="form-control" id="floatingPassword" placeholder="New Password" value="">
             </div>
             <div class="row" style="padding-right: 500px;padding-top: 20px" class="form-floating">
                 <label for="floatingPassword">New Password Confirmation</label>
-                <input type="password" class="form-control" id="floatingPassword" placeholder="New Password">
+                <input type="password" class="form-control" id="floatingPassword" placeholder="New Password" value="">
 
             </div>
             <div class="row" style="padding-right: 100px;padding-top: 30px">
                 <div class="mb-3">
-                    <button type="button" class="btn btn-success">Save Changes</button>
+                    <button type="submit" name="save" class="btn btn-success">Save Changes</button>
                 </div>
             </div>
+            </form>
         </div>
     </div>
+    <?php
+    if(isset($_POST['save']))
+    {
+        //echo '<script type="text/javascript">alert("Update Clicked")</script>';
+        if(empty($password || $npassword || $cfpassword))
+        {
+            echo '<script type="text/javascript">alert("Enter Data in All fields")</script>';
+        }
+        else
+        {
+            $password = $_POST['password']; //current password
+            $npassword = $_POST['npassword']; //new password
+            $cfpassword = $_POST['cfpassword']; //confirmation of new password
 
+            $check = $db -> query("SELECT * FROM user WHERE email='".$_SESSION["email"]."'");
+            $userfound = $check -> fetch_assoc();
+
+            if($password == $userfound['password'] && $npassword == $cfpassword){
+
+                $query = "UPDATE user SET password='$npassword' where email='".$_SESSION["email"]."'";
+
+                $query_run = mysqli_query($db,$query);
+                $pw = $query_run -> fetch_assoc();
+            }
+            else {
+                echo '<script type="text/javascript">alert("")</script>';
+            }
+
+
+
+            if($pw)
+            {
+                echo '<script type="text/javascript">alert("Product Updated successfully")</script>';
+            }
+            else{
+                echo '<script type="text/javascript">alert("Error")</script>';
+            }
+
+        }
+    }
+    ?>
 </div>
 </body>
 </html>

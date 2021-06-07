@@ -21,14 +21,11 @@
 
 </div>
 
-<div class="col-6" style="margin-left:400px">
+<div class="col-6" style="margin-left:400px;margin-top: 60px">
     <div class="col" align="center" style="padding-top: 10px">
         <h4>
-            Number of Comments
+            Comments
         </h4>
-        <p>
-            150
-        </p>
     </div>
     <div class="col"  style="border: 1px solid;overflow:auto;overflow-x:hidden; height:600px;padding: 10px;">
         <div class="col" align="right">

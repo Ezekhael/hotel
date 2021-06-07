@@ -76,7 +76,7 @@ function test_input($data) {
 
 
 
-<div style="padding-left: 30px">
+<div style="padding-left: 30px;margin-top: 50px">
     <div style="padding-top: 30px">
        <?php
        echo $error;
