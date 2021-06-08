@@ -1,3 +1,12 @@
+<?php
+session_start();
+include("server.php");
+
+if(!isset($_SESSION["email"])) {
+    header("Location: login.php");
+    exit();
+}
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -39,51 +48,25 @@
         </div>
         <div class="col-6" style="padding-right: 500px">
             <div class="col" align="right">
-                <!-- Button trigger modal -->
-                <a type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    <i class="bi bi-chat-left-text"></i>
-                </a>
-
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Add Comment</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="form-floating">
-                                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
-                                    <label for="floatingTextarea">Comments</label>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
             <div class="col"  style="border: 1px solid;overflow:auto;overflow-x:hidden; height:500px;padding: 10px">
-               <div class="row" style="border: 1px solid">
-                 <div class="row">
+                <div class="row" style="border: 1px solid">
+                    <?php
+                    $select = "SELECT * FROM comment WHERE email = '".$_SESSION["email"]."'";
+                    $result = $db->query($select);
+                    while($comment = $result -> fetch_assoc()){
+
+
+                    ?>
+                 <div class="row" style="border: 1px solid">
                     <p>
-                        It's a very good hotel. One of the hotels I have ever been.
-                        It's a very good hotel. One of the hotels I have ever been.
-                        It's a very good hotel. One of the hotels I have ever been.
-                        It's a very good hotel. One of the hotels I have ever been.
+                        <?php echo $comment['comment']; ?>
                     </p>
                  </div>
+                    <?php
+                    }
+                    ?>
                    <div class="row">
-                       <div class="col" style="padding-left: 20px">
-                           <a href="#">  <i class="bi bi-trash-fill"></i></a>
-
-                       </div>
-                       <div class="col" style="padding-right: 330px">
-                          <a href="#"> <i class="bi bi-pencil-fill"></i></a>
-                       </div>
                    </div>
                </div>
             </div>

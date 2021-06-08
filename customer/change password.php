@@ -97,10 +97,19 @@ if(!isset($_SESSION["email"])) {
                 {
                     echo '<script type="text/javascript">alert("Password Updated successfully")</script>';
                 }
-                else{
-                    echo '<script type="text/javascript">alert("Passwords does not match")</script>';
+                else {
+                    echo '<script type="text/javascript">alert("Update failed")</script>';
                 }
+
             }
+            else{
+                echo '<script type="text/javascript">alert("Passwords does not match")</script>';
+            }
+
+
+
+
+
         }
     }
     ?>

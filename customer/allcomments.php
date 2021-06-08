@@ -1,3 +1,8 @@
+<?php
+session_start();
+include("server.php");
+$msg="";
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -21,123 +26,68 @@
 
 </div>
 
-<div class="col-6" style="margin-left:400px;margin-top: 60px">
+<div class="col-6" style="margin-left:1px;margin-top: 60px">
     <div class="col" align="center" style="padding-top: 10px">
-        <h4>
-            Comments
-        </h4>
-    </div>
-    <div class="col"  style="border: 1px solid;overflow:auto;overflow-x:hidden; height:600px;padding: 10px;">
-        <div class="col" align="right">
-            <!-- Button trigger modal -->
-            <a type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                <i class="bi bi-chat-left-text"></i>
-            </a>
+        <div class="container">
+            <div class="row justifiy-content-center">
+                <div class="col-lg-5 bg-light rounded mt-2">
+                    <h4 class="text-center p-2"> Write a comment </h4>
+                    <form action="allcomments.php" method="POST" class="p-2" >
+                        <div class="form-group">
+                            <textarea  name="comment" class="form-control rounded-0" placeholder="Write your comment" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" name="submit" class="btn bt-primary rounded-0" value="Post Comment">
+                            <h6 class="float-right text-succes p-2"><?=$msg;?></h6>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <?php
+            $sql="SELECT * FROM comment ORDER BY id DESC";
+            $result= $db->query($sql);
+            while($row=$result->fetch_assoc()) {
 
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Add Comment</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="form-floating">
-                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
-                                <label for="floatingTextarea">Comments</label>
+
+                ?>
+                <div class="row justify-content-center">
+
+                    <div class="row rounded bg-light">
+
+                        <div class="card mb-2 border-secondary">
+                            <div class="card-header bg-secondary py-1 text-light">
+                                <span class="font-italic">Posted by : <?= $_SESSION['name'] ?> <?= $_SESSION['surname'] ?></span>
+                                <span class="float-right font-italic">On : <?=$row['date'] ?></span>
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
+                            <div class="card-body py-2">
+                                <p class="card-text"><?= $row['comment']?></p>
+                            </div>
+                            <div class="card-footer py-2">
+                                <div class="float-right">
+                                </div>
+
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="row" style="border: 1px solid">
-            <div class="row">
-                <p>
-                    It's a very good hotel. One of the hotels I have ever been.
-                    It's a very good hotel. One of the hotels I have ever been.
-                    It's a very good hotel. One of the hotels I have ever been.
-                    It's a very good hotel. One of the hotels I have ever been.
-                    It's a very good hotel. One of the hotels I have ever been.
-                    It's a very good hotel. One of the hotels I have ever been.
-                    It's a very good hotel. One of the hotels I have ever been.
-                    It's a very good hotel. One of the hotels I have ever been.
-                </p>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <h6>Bahadır Enes AY</h6>
-                </div>
-            </div>
-        </div>
-        <div class="row" style="border: 1px solid">
-            <div class="row">
-                <p>
-                    It's a very good hotel. One of the hotels I have ever been.
-                    It's a very good hotel. One of the hotels I have ever been.
-                    It's a very good hotel. One of the hotels I have ever been.
-                    It's a very good hotel. One of the hotels I have ever been.
-                    It's a very good hotel. One of the hotels I have ever been.
-                    It's a very good hotel. One of the hotels I have ever been.
-                    It's a very good hotel. One of the hotels I have ever been.
-                </p>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <h6>Bahadır Enes AY</h6>
-                </div>
-            </div>
-        </div>
-        <div class="row" style="border: 1px solid">
-            <div class="row">
-                <p>
-                    It's a very good hotel. One of the hotels I have ever been.
-                    It's a very good hotel. One of the hotels I have ever been.
-                    It's a very good hotel. One of the hotels I have ever been.
-                    It's a very good hotel. One of the hotels I have ever been.
-                    It's a very good hotel. One of the hotels I have ever been.
-                    It's a very good hotel. One of the hotels I have ever been.
-                    It's a very good hotel. One of the hotels I have ever been.
+                <?php
 
-                </p>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <h6>Bahadır Enes AY</h6>
-                </div>
-            </div>
-        </div>
-        <div class="row" style="border: 1px solid">
-            <div class="row">
-                <p>
-                    It's a very good hotel. One of the hotels I have ever been.
-                    It's a very good hotel. One of the hotels I have ever been.
-                    It's a very good hotel. One of the hotels I have ever been.
-                    It's a very good hotel. One of the hotels I have ever been.
-                    It's a very good hotel. One of the hotels I have ever been.
-                    It's a very good hotel. One of the hotels I have ever been.
-                    It's a very good hotel. One of the hotels I have ever been.
+            }
+            if(isset($_POST['submit'])){
+                $comment=$_POST['comment'];
+                $date=date("Y-m-d");
+                $email=$_SESSION['email'];
+                $sql="INSERT INTO comment(comment,date,email)VALUES ('$comment','$date','$email')";
 
-                </p>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <h6>Bahadır Enes AY</h6>
-                </div>
+                if($db->query($sql)){
+                    $msg="Posted";
+                }
+                else {
+                    $msg = "Failed to poste";
+                }
+            }
+            ?>
 
-            </div>
         </div>
-    </div>
-</div>
-            </div>
-        </div>
-    </div>
-
-</div>
 </body>
 </html>
