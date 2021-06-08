@@ -66,7 +66,7 @@ if(!isset($_SESSION["email"])) {
                             </tr>
                             <tr>
                                 <th scope="row">Check-out Date</th>
-                                <td>2021-06-20</td>
+                                <td>2021-06-30</td>
                             </tr>
                             <tr>
                                 <th scope="row">Room Type</th>
@@ -74,38 +74,38 @@ if(!isset($_SESSION["email"])) {
                             </tr>
                             <tr>
                                 <th scope="row">Price</th>
-                                <td colspan="2">5000 TRY</td>
+                                <td colspan="2">15000 TRY</td>
                             </tr>
                             </tbody>
                         </table>
                     </div>
                     <!-- Button trigger modal -->
                     <div class="row">
-                    <div class="col-3">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        Extend
-                    </button>
+                        <div class="col-3">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                Extend
+                            </button>
 
-                    <!-- Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Warning!</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <label for="dateInp2" class="form-label">New Check-out Date</label>
-                                    <input type="date" class="form-control" id="dateInp2">
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <a class="btn btn-primary" href="reservations2.php" role="button">Extend </a>
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Warning!</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <label for="dateInp2" class="form-label">New Check-out Date</label>
+                                            <input type="date" class="form-control" id="dateInp2">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <a class="btn btn-primary" href="reservations.php" role="button">Extend </a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    </div>
                         <div class="col">
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">

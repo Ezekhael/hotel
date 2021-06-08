@@ -117,11 +117,11 @@ if(isset($_SESSION['email'])) {
                 <tbody>
                 <tr>
                     <th scope="row">Check-in Date</th>
-                    <td>15.06.2021</td>
+                    <td>2021-06-15</td>
                 </tr>
                 <tr>
                     <th scope="row">Check-out Date</th>
-                    <td>20.06.2021</td>
+                    <td>2021-06-20</td>
                 </tr>
                 <tr>
                     <th scope="row">Room Type</th>
@@ -129,7 +129,7 @@ if(isset($_SESSION['email'])) {
                 </tr>
                 <tr>
                     <th scope="row">Price</th>
-                    <td colspan="2">1000 TRY</td>
+                    <td colspan="2">5000 TRY</td>
                 </tr>
                 </tbody>
             </table>

@@ -55,7 +55,12 @@
 
         </div>
         <div class="col-4">
+            <div class="row" style="padding-top:145px">
 
+                <a href="search.php">
+                    <button type="button" class="btn btn-primary ">Search</button>
+                </a>
+            </div>
         </div>
 
 

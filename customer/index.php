@@ -100,33 +100,24 @@ include("server.php");
             </div>
         </div>
         <div class="col-3" align="center">
-            <div class="row" style="padding-top:120px;padding-right: 230px">
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Select Room Type</option>
-                    <option value="1">VIP Room</option>
-                    <option value="2">Family Room</option>
-                    <option value="3">Double Room</option>
-                    <option value="4">Single Room</option>
-                </select>
-            </div>
             <div class="row" style="padding-right:230px;padding-top: 120px">
                 <label for="dateInp1" class="form-label">Check-in Date</label>
                 <input type="date" class="form-control" id="dateInp1">
             </div>
         </div>
         <div class="col-3" align="center">
-            <div class="row" style="padding-top:120px;padding-right: 230px">
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Select Number of Person</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                    <option value="4">Four</option>
-                </select>
-            </div>
             <div class="row" style="padding-right:230px;padding-top: 120px">
                 <label for="dateInp2" class="form-label">Check-out Date</label>
                 <input type="date" class="form-control" id="dateInp2">
+            </div>
+            <div class="row" style="padding-top:120px;padding-right: 230px">
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>Select Number of Person</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
             </div>
             <div class="row" style="padding-top:220px;padding-right:95px">
                 <a href="search.php">
