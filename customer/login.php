@@ -42,6 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")  {
         $validate=false;
     } else {
         $password = test_input($_POST["password"]);
+        //$password=md5($password); for security removed for presentation
     }
 
     $check = $db -> query("SELECT * FROM user WHERE email = '$email'");

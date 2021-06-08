@@ -94,7 +94,7 @@ if(!empty($_POST["name"] && $_POST["surname"] && $_POST["email"] && $_POST["phon
         $email = $_POST["email"];
         $phoneNumber = $_POST["phone"];
         $password = $_POST["password"];
-        $password = md5($password);
+        //$password = md5($password); security purpose
         $passwordAgain = $_POST["cfpassword"];
 
 
