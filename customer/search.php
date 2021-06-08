@@ -69,3 +69,17 @@
 </div>
 </body>
 </html>
+<?php/*
+
+$_SESSION['checkin'] = $_POST['checkin'];
+$_SESSION['checkout'] = $_POST['checkout'];
+$_SESSION['numofcustomers'] = $_POST['numofcustomers'];
+
+$selectSql = "SELECT * FROM 'room' WHERE status = 'Empty'";
+$resultSql= $db->query($selectSql);
+
+
+while($room = $resultSql->fetch_assoc()) {
+}
+?>
+*/
