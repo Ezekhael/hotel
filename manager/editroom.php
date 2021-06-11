@@ -54,13 +54,13 @@ while($row=mysqli_fetch_assoc($result))
 if(isset($_POST['update']))
 {
 
-    $doornumber = $_GET['GetID'];
+    $doornumberold = $_GET['GetID'];
     $doornumber = $_POST['doornumber'];
     $floornumber = $_POST['floornumber'];
     $roomtype = $_POST['roomtype'];
     $roomstatus = $_POST['roomstatus'];
 
-    $update = " update room set doornumber = '".$doornumber."',floornumber = '".$floornumber."', roomtype = '".$roomtype."',roomstatus='".$roomstatus."' where doornumber='".$doornumber."'";
+    $update = " update room set doornumber = '".$doornumber."',floornumber = '".$floornumber."', roomtype = '".$roomtype."',roomstatus='".$roomstatus."' where doornumber='".$doornumberold."'";
 
     $res = mysqli_query($db,$update);
 

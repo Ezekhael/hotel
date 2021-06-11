@@ -135,7 +135,19 @@ if(isset($_POST['submit'])){
                         Total Rooms
                     </h4>
                     <p>
-                        250
+                        <?php
+
+                        $sql="SELECT doornumber FROM room";
+
+                        if ($num=mysqli_query($db,$sql))
+                        {
+                            // Return the number of rows in result set
+                            $rowcount=mysqli_num_rows($num);
+                            printf("There is %d rooms.\n",$rowcount);
+                            // Free result set
+                            mysqli_free_result($num);
+                        }
+                        ?>
                     </p>
                 </div>
                 <div class="col-2" style="padding-top: 30px; margin-left: 100px" align="center">
