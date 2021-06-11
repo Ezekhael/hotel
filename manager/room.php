@@ -1,3 +1,35 @@
+<?php
+session_start();
+include("server.php");
+?>
+<?php
+if(isset($_POST['submit'])){
+
+    if(!empty($_POST['doornumber']) && !empty($_POST['floornumber']) && !empty($_POST['roomtype']) && !empty($_POST['roomstatus'])){
+
+        $doornumber = $_POST['doornumber'];
+        $floornumber = $_POST['floornumber'];
+        $roomtype = $_POST['roomtype'];
+        $roomstatus = $_POST['roomstatus'];
+
+        $query = "INSERT INTO room(doornumber,floornumber,roomtype,roomstatus) values('$doornumber','$floornumber','$roomtype','$roomstatus')";
+
+        $run = mysqli_query($db,$query) or die(mysqli_error());
+
+        if($run){
+            echo "Room created successfully";
+        }
+        else{
+            echo "Room could not be created successfully";
+        }
+    }
+    else{
+        echo "All fields required";
+    }
+}
+
+
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -51,16 +83,8 @@
                                         <i class="bi bi-bar-chart"></i>    Dashboard</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="bookings.html" class="list-group-item list-group-item-action bg-light" style="color:black">
-                                        <i class="bi bi-calendar-check"></i>    Bookings</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="booked%20rooms.html" class="list-group-item list-group-item-action bg-light" style="color:black">
-                                        <i class="bi bi-clipboard-check"></i>    Booked Rooms</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="empty%20rooms.html" class="list-group-item list-group-item-action bg-light active" style="color:black">
-                                        <i class="bi bi-house-door"></i>    Empty Rooms</a>
+                                    <a href="staff.php" class="list-group-item list-group-item-action bg-light" style="color:black">
+                                        <i class="bi bi-person"></i>    Staff</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="#" class="list-group-item list-group-item-action bg-light" style="color:black">
@@ -73,7 +97,7 @@
 
                                     <ul class="sub-menu" id="subMenu" style="display: block">
                                         <li class="nav-item">
-                                            <a href="rooms.html" class="list-group-item list-group-item-action bg-light" style="color:black">
+                                            <a href="room.php" class="list-group-item list-group-item-action bg-light active" style="color:black">
                                                 <i class="bi bi-house-fill"></i>    Rooms</a>
                                         </li>
                                         <li class="nav-item">
@@ -103,7 +127,9 @@
         </div>
         <div class="col-9" style="border: 1px solid;padding-top: 10px">
             <div class="row">
-                <div class="col-2" style="border: 1px solid;padding-top: 30px; margin-left: 100px" align="center">
+                <div class="col-2" style="padding-top: 30px; margin-left: 100px" align="center">
+                </div>
+                <div class="col-2" style="border: 1px solid;padding-top: 30px; margin-left: 180px" align="center">
                     <img src="house.png" height="40px" width="40px">
                     <h4>
                         Total Rooms
@@ -112,89 +138,87 @@
                         250
                     </p>
                 </div>
-                <div class="col-2" style="border: 1px solid;padding-top: 30px; margin-left: 100px" align="center">
-                    <img src="house.png" height="40px" width="40px">
-                    <h4>
-                        Booking Rooms
-                    </h4>
-                    <p>
-                        50
-                    </p>
+                <div class="col-2" style="padding-top: 30px; margin-left: 100px" align="center">
                 </div>
-                <div class="col-2" style="border: 1px solid;padding-top: 30px; margin-left: 100px" align="center">
-                    <img src="house.png" height="40px" width="40px">
-                    <h4>
-                        Booked Rooms
-                    </h4>
-                    <p>
-                        100
-                    </p>
-                </div>
-                <div class="col-2" style="border: 1px solid;padding-top: 30px; margin-left: 100px" align="center">
-                    <img src="house.png" height="40px" width="40px">
-                    <h4>
-                        Empty Rooms
-                    </h4>
-                    <p>
-                        100
-                    </p>
+                <div class="col-2" style="padding-top: 30px; margin-left: 100px" align="center">
                 </div>
             </div>
+            <p align="left" style="padding-top:10px">Add New Room</p>
+            <div class="row" style="padding-right: 1400px">
+
+                <!-- Button trigger modal -->
+                <a type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <i class="bi bi-plus-circle"></i>
+                </a>
+
+                <!-- Modal -->
+                <form action="room.php" method="POST">
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Add New Room</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <label style="padding-top: 10px" class="form-label">Enter Door Number</label>
+                                    <input type="text" name="doornumber" class="form-control" placeholder="Door Number">
+
+                                    <label  class="form-label">Enter Floor Number</label>
+                                    <input type="text" name="floornumber" class="form-control" placeholder="Floor Number">
+
+                                    <label  class="form-label">Enter Room Type</label>
+                                    <input type="text" name="roomtype" class="form-control" placeholder="Room Type">
+
+                                    <label  class="form-label">Enter Room Status</label>
+                                    <input type="text" name="roomstatus" class="form-control" placeholder="Room Status">
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" name="submit" class="btn btn-primary" >Continue</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
             <div class="row" style="padding-top: 30px;overflow:auto;overflow-x:hidden;max-height: 300px">
-                <table class="table">
+                <table class="table table-bordered">
                     <thead>
                     <tr>
-                        <th scope="col">Room ID</th>
-                        <th scope="col">Room Type</th>
-                        <th scope="col">Floor</th>
                         <th scope="col">Door Number</th>
-                        <th scope="col">Price(TRY)</th>
+                        <th scope="col">Floor Number</th>
+                        <th scope="col">Room Type</th>
+                        <th scope="col">Room Status</th>
+                        <th scope="col">Edit</th>
+                        <th scope="col">Delete</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr>
-                        <th scope="row">7</th>
-                        <td>VIP</td>
-                        <td>1</td>
-                        <td>107</td>
-                        <td>1000</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">8</th>
-                        <td>Double</td>
-                        <td>1</td>
-                        <td>108</td>
-                        <td>500</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">9</th>
-                        <td>Single</td>
-                        <td>2</td>
-                        <td>209</td>
-                        <td>300</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">11</th>
-                        <td>Family</td>
-                        <td>2</td>
-                        <td>211</td>
-                        <td>700</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">12</th>
-                        <td>Family</td>
-                        <td>2</td>
-                        <td>212</td>
-                        <td>700</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">13</th>
-                        <td>VIP</td>
-                        <td>2</td>
-                        <td>213</td>
-                        <td>1000</td>
-                    </tr>
-                    </tbody>
+                    <?php
+                    //for view
+                    $get = " SELECT * FROM room ";
+                    $result = mysqli_query($db,$get);
+
+                    while($row=mysqli_fetch_assoc($result))
+                    {
+                        $doornumber = $row['doornumber'];
+                        $floornumber = $row['floornumber'];
+                        $roomtype = $row['roomtype'];
+                        $roomstatus = $row['roomstatus'];
+
+                        ?>
+                        <tr>
+                            <td><?php echo $doornumber ?></td>
+                            <td><?php echo $floornumber ?></td>
+                            <td><?php echo $roomtype ?></td>
+                            <td><?php echo $roomstatus ?></td>
+                            <td><a href="editroom.php?GetID=<?php echo $doornumber ?>">Edit</a></td>
+                            <td><a href="deleteroom.php?Del=<?php echo $doornumber ?>">Delete</a></td>
+                        </tr>
+                        <?php
+                    }
+                    ?>
                 </table>
             </div>
         </div>
