@@ -4,13 +4,38 @@ include("server.php");
 ?>
 <?php
 $doornumber = $_GET['GetID'];
-$query = " select * from reservation where doornumber='".$doornumber."'";
+$checkin = $_GET['checkin'];
+$query = " select * from reservation JOIN room ON reservation.doornumber= room.doornumber where reservation.doornumber='".$doornumber."' and reservation.checkin='".$checkin."' ";
 $result = mysqli_query($db,$query);
+echo $db->error;
 
 while($row=mysqli_fetch_assoc($result))
 {
+    $checkin = $row['checkin'];
     $checkout = $row['checkout'];
+    $totprice = $row['totprice'];
+    $roomtype = $row['roomtype'];
 }
+
+?>
+<?php
+function calc($checkin, $checkout, $roomtype){
+    include("server.php");
+
+    $select = $db -> query("SELECT * FROM roomprice"
+        ." WHERE roomtype = '".$roomtype."'");
+
+    $price = $select -> fetch_assoc();
+
+    $date1 = date_create("$checkout");
+    $date2 = date_create("$checkin");
+
+    $diff = date_diff($date1, $date2);
+
+    return $diff->format('%d') * $price['price'];
+}
+
+
 
 ?>
 <!DOCTYPE html>
@@ -33,8 +58,8 @@ while($row=mysqli_fetch_assoc($result))
                 </div>
                 <div class="card-body">
 
-                    <form action="editroom.php?GetID=<?php echo $doornumber ?>" method="post">
-                        <input type="date" class="form-control mb-2" placeholder=" Door Number " name="checkout" value="<?php echo $checkout ?>">
+                    <form action="editreservation.php?GetID=<?php echo $doornumber ?>&checkin=<?php echo $checkin?>" method="post">
+                        <input type="date" class="form-control mb-2" placeholder=" Check-Out " name="checkout" value="<?php echo $checkout ?>">
                         <button type="submit" button class="btn btn-primary" name="update">Update</button>
                     </form>
 
@@ -47,17 +72,17 @@ while($row=mysqli_fetch_assoc($result))
 
 if(isset($_POST['update']))
 {
-
-
-    $checkout = $_POST['checkout'];
-
-    $update = " update reservation set checkout='".$checkout."' where doornumber='".$doornumber."'";
+    $update = " update reservation set checkout='".$_POST['checkout']."' where doornumber='".$doornumber."' and checkin='".$checkin."'";
 
     $res = mysqli_query($db,$update);
 
+
     if($res)
     {
-        header("location:reservation.php");
+        $totprice = calc($checkin,$_POST['checkout'], $roomtype);
+        $changetot = $db->query("UPDATE reservation SET totprice = '".$totprice."' where doornumber='".$doornumber."' and checkin='".$checkin."'");
+        echo $db->error;
+        header("location:reservations.php");
     }
     else
     {

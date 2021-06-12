@@ -1,3 +1,7 @@
+<?php
+session_start();
+include("server.php");
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -69,7 +73,7 @@
                                                 <i class="bi bi-house-fill"></i>    Rooms</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="customers.php" class="list-group-item list-group-item-action bg-light" style="color:black">
+                                            <a href="customers.php" class="list-group-item list-group-item-action bg-light active" style="color:black">
                                                 <i class="bi bi-person"></i>    Customers</a>
                                         </li>
                                         <li class="nav-item">
@@ -93,32 +97,81 @@
                 </div>
             </div>
         </div>
-        <div class="col-6">
+        <div class="col-9" style="border: 1px solid;padding-top: 10px">
+            <div class="row">
+                <div class="col-2" style="padding-top: 30px; margin-left: 100px" align="center">
+                </div>
+                <div class="col-2" style="border: 1px solid;padding-top: 30px; margin-left: 180px" align="center">
+                    <h4>
+                        Total Customer
+                    </h4>
+                    <p>
+                        <?php
 
-            <div class="col"  style="border: 1px solid;overflow:auto;overflow-x:hidden; height:500px;padding: 10px">
-                <div class="col" align="center" style="padding-top: 10px">
-                    <h3 align="center">
-                        Login
-                    </h3>
+                        $sql="SELECT email FROM user";
+
+                        if ($num=mysqli_query($db,$sql))
+                        {
+                            // Return the number of rows in result set
+                            $rowcount=mysqli_num_rows($num);
+                            printf("There is %d customer.\n",$rowcount);
+                            // Free result set
+                            mysqli_free_result($num);
+                        }
+                        ?>
+                    </p>
                 </div>
-                <div style="padding-right: 340px;margin-left: 360px;margin-top: 30px" class="form-floating mb-3" >
-                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                    <label for="floatingInput">Email address</label>
+                <div class="col-2" style="padding-top: 30px; margin-left: 100px" align="center">
                 </div>
-                <div style="padding-right: 340px;margin-left: 360px;margin-top: 10px" class="form-floating">
-                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                    <label for="floatingPassword">Password</label>
-                </div>
-                <div style="padding-top: 20px;margin-left: 430px">
-                    <a href="dashboard.html">
-                        <button type="button" class="btn btn-outline-primary">Login</button>
-                    </a>
+                <div class="col-2" style="padding-top: 30px; margin-left: 100px" align="center">
                 </div>
             </div>
+
+            <div class="row" style="padding-top: 30px;overflow:auto;overflow-x:hidden;max-height: 300px">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th scope="col">Customer Name</th>
+                        <th scope="col">Customer Surname</th>
+                        <th scope="col">Customer Email</th>
+                        <th scope="col">Customer Phone Number</th>
+                        <th scope="col">Edit</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                    </thead>
+                    <?php
+                    //for view
+                    $get = " SELECT * FROM user ";
+                    $result = mysqli_query($db,$get);
+
+                    while($row=mysqli_fetch_assoc($result))
+                    {
+                        $name = $row['name'];
+                        $surname = $row['surname'];
+                        $email = $row['email'];
+                        $phone = $row['phone'];
+
+                        ?>
+                        <tr>
+                            <td><?php echo $name ?></td>
+                            <td><?php echo $surname ?></td>
+                            <td><?php echo $email ?></td>
+                            <td><?php echo $phone ?></td>
+                            <td><a href="editcustomer.php?GetID=<?php echo $email ?>">Edit</a></td>
+                            <td><a href="deletecustomer.php?Del=<?php echo $email ?>">Delete</a></td>
+                        </tr>
+                        <?php
+                    }
+                    ?>
+                </table>
+            </div>
         </div>
+
     </div>
 </div>
 </div>
+
+
 
 </body>
 </html>

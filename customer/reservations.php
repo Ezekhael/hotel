@@ -68,8 +68,8 @@ if(!isset($_SESSION["email"])) {
                                 <th scope="col">Door Number</th>
                                 <th scope="col">Room Type</th>
                                 <th scope="col">Price</th>
-                                <th scope="col">Edit</th>
-                                <th scope="col">Delete</th>
+                                <th scope="col">Extend</th>
+                                <th scope="col">Cancel</th>
                             </tr>
                             </thead>
                             <?php
@@ -92,8 +92,8 @@ if(!isset($_SESSION["email"])) {
                                     <td><?php echo $doornumber ?></td>
                                     <td><?php echo $roomtype ?></td>
                                     <td><?php echo $totprice ?></td>
-                                    <td><a href="editreservation.php?GetID=<?php echo $doornumber ?>">Edit</a></td>
-                                    <td><a href="deletereservation.php?Del=<?php echo $doornumber ?>">Delete</a></td>
+                                    <td><a href="editreservation.php?GetID=<?php echo $doornumber ?>&checkin=<?php echo $checkin?>">Extend</a></td>
+                                    <td><a href="deletereservation.php?Del=<?php echo $doornumber ?>">Cancel</a></td>
                                 </tr>
                                 <?php
                             }

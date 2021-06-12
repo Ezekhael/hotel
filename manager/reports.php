@@ -1,3 +1,36 @@
+<?php
+session_start();
+include("server.php");
+?>
+<?php
+if(isset($_POST['submit'])){
+
+    if(!empty($_POST['startdate']) && !empty($_POST['enddate'])){
+
+        $startdate = $_POST['startdate'];
+        $enddate = $_POST['enddate'];
+        $revenue = $db->query("SELECT SUM(totprice) AS totprice FROM reservation WHERE checkin BETWEEN '$startdate' and '$enddate'")->fetch_assoc()["totprice"];
+        $expense = $db->query("SELECT SUM(salary) * (TIMESTAMPDIFF(MONTH, '$startdate','$enddate') + 1) AS salary FROM staff")->fetch_assoc()["salary"];
+        $query = "INSERT INTO report(startdate,enddate,revenue,expense) values('$startdate','$enddate','$revenue','$expense')";
+
+        $run = $db->query($query);
+
+        if($run){
+
+            header("location:reports.php");
+
+        }
+        else{
+            echo "Report could not be created successfully";
+        }
+    }
+    else{
+        echo "All fields required";
+    }
+}
+
+
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -69,21 +102,21 @@
                                                 <i class="bi bi-house-fill"></i>    Rooms</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="customers.html" class="list-group-item list-group-item-action bg-light" style="color:black">
+                                            <a href="customers.php" class="list-group-item list-group-item-action bg-light" style="color:black">
                                                 <i class="bi bi-person"></i>    Customers</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="reservations.html" class="list-group-item list-group-item-action bg-light" style="color:black"style="color:black">
+                                            <a href="reservations.php" class="list-group-item list-group-item-action bg-light" style="color:black" style="color:black">
                                                 <i class="bi bi-receipt"></i>    Reservations</a>
                                         </li>
                                     </ul>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="reports.html" class="list-group-item list-group-item-action bg-light active" style="color:black">
+                                    <a href="reports.php" class="list-group-item list-group-item-action bg-light active" style="color:black">
                                         <i class="bi bi-book"></i>    Reports</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="comments.html" class="list-group-item list-group-item-action bg-light" style="color:black">
+                                    <a href="comments.php" class="list-group-item list-group-item-action bg-light" style="color:black">
                                         <i class="bi bi-chat-left-text"></i>    Comments</a>
                                 </li>
 
@@ -101,7 +134,19 @@
                         Total Reports
                     </h4>
                     <p>
-                        50
+                        <?php
+
+                        $sql="SELECT * FROM report";
+
+                        if ($num=mysqli_query($db,$sql))
+                        {
+                            // Return the number of rows in result set
+                            $rowcount=mysqli_num_rows($num);
+                            printf(" %d \n",$rowcount);
+                            // Free result set
+                            mysqli_free_result($num);
+                        }
+                        ?>
                     </p>
                 </div>
             </div>
@@ -114,6 +159,7 @@
                 </a>
 
                 <!-- Modal -->
+
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -121,103 +167,57 @@
                                 <h5 class="modal-title" id="exampleModalLabel">Create New Report</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
+                            <form action="reports.php" method="POST">
                             <div class="modal-body">
                                 <label for="dateInp2" class="form-label">Starting Date</label>
-                                <input type="date" class="form-control" id="dateInp1">
+                                <input type="date" name="startdate" class="form-control" id="dateInp1">
                                 <label for="dateInp2" class="form-label">Ending Date</label>
-                                <input type="date" class="form-control" id="dateInp2">
+                                <input type="date" name="enddate" class="form-control" id="dateInp2">
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Create Report</button>
+                                <input type="submit" name="submit" class="btn btn-primary" value="Create Report">
                             </div>
+                            </form>
                         </div>
                     </div>
                 </div>
+
             </div>
             <div class="row" style="padding-top: 30px;overflow:auto;overflow-x:hidden;max-height: 300px">
-                <table class="table">
+                <table class="table table-bordered">
                     <thead>
                     <tr>
-                        <th scope="col">Report ID</th>
-                        <th scope="col">Starting Date</th>
+                        <th scope="col">Start Date</th>
                         <th scope="col">End Date</th>
                         <th scope="col">Revenue</th>
                         <th scope="col">Expense</th>
-                        <th scope="col">Total Customer</th>
-                        <th scope="col">Total Room</th>
-                        <th scope="col">Empty Rooms</th>
-                        <th scope="col">Full Rooms</th>
+                        <th scope="col">Delete</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr>
-                        <th scope="row">1234</th>
-                        <td>01.02.2021</td>
-                        <td>01.03.2021</td>
-                        <td>25000</td>
-                        <td>5000</td>
-                        <td>150</td>
-                        <td>400</td>
-                        <td>250</td>
-                        <td>150</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1234</th>
-                        <td>01.02.2021</td>
-                        <td>01.03.2021</td>
-                        <td>25000</td>
-                        <td>5000</td>
-                        <td>150</td>
-                        <td>400</td>
-                        <td>250</td>
-                        <td>150</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1234</th>
-                        <td>01.02.2021</td>
-                        <td>01.03.2021</td>
-                        <td>25000</td>
-                        <td>5000</td>
-                        <td>150</td>
-                        <td>400</td>
-                        <td>250</td>
-                        <td>150</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1234</th>
-                        <td>01.02.2021</td>
-                        <td>01.03.2021</td>
-                        <td>25000</td>
-                        <td>5000</td>
-                        <td>150</td>
-                        <td>400</td>
-                        <td>250</td>
-                        <td>150</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1234</th>
-                        <td>01.02.2021</td>
-                        <td>01.03.2021</td>
-                        <td>25000</td>
-                        <td>5000</td>
-                        <td>150</td>
-                        <td>400</td>
-                        <td>250</td>
-                        <td>150</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1234</th>
-                        <td>01.02.2021</td>
-                        <td>01.03.2021</td>
-                        <td>25000</td>
-                        <td>5000</td>
-                        <td>150</td>
-                        <td>400</td>
-                        <td>250</td>
-                        <td>150</td>
-                    </tr>
-                    </tbody>
+                    <?php
+                    //for view
+                    $get = " SELECT * FROM report ";
+                    $result = mysqli_query($db,$get);
+
+                    while($row=mysqli_fetch_assoc($result))
+                    {
+                        $startdate = $row['startdate'];
+                        $enddate = $row['enddate'];
+                        $revenue = $row['revenue'];
+                        $expense = $row['expense'];
+
+                        ?>
+                        <tr>
+                            <td><?php echo $startdate ?></td>
+                            <td><?php echo $enddate ?></td>
+                            <td><?php echo $revenue ?></td>
+                            <td><?php echo $expense ?></td>
+                            <td><a href="deletereport.php?Del=<?php echo $startdate ?>&enddate=<?php echo $enddate?>">Delete</a></td>
+                        </tr>
+                        <?php
+                    }
+                    ?>
                 </table>
             </div>
         </div>
@@ -225,7 +225,6 @@
     </div>
 </div>
 </div>
-
 
 
 </body>

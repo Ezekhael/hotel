@@ -1,3 +1,7 @@
+<?php
+session_start();
+include("server.php");
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -73,7 +77,7 @@
                                                 <i class="bi bi-person"></i>    Customers</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="reservations.php" class="list-group-item list-group-item-action bg-light" style="color:black" style="color:black">
+                                            <a href="reservations.php" class="list-group-item list-group-item-action bg-light active" style="color:black" style="color:black">
                                                 <i class="bi bi-receipt"></i>    Reservations</a>
                                         </li>
                                     </ul>
@@ -93,32 +97,90 @@
                 </div>
             </div>
         </div>
-        <div class="col-6">
+        <div class="col-9" style="border: 1px solid;padding-top: 10px">
+            <div class="row">
+                <div class="col-2" style="padding-top: 30px; margin-left: 100px" align="center">
+                </div>
+                <div class="col-2" style="border: 1px solid;padding-top: 30px; margin-left: 200px" align="center">
+                    <h4>
+                        Total Reservation
+                    </h4>
+                    <p>
+                        <?php
 
-            <div class="col"  style="border: 1px solid;overflow:auto;overflow-x:hidden; height:500px;padding: 10px">
-                <div class="col" align="center" style="padding-top: 10px">
-                    <h3 align="center">
-                        Login
-                    </h3>
+                        $sql="SELECT doornumber FROM reservation";
+
+                        if ($num=mysqli_query($db,$sql))
+                        {
+                            // Return the number of rows in result set
+                            $rowcount=mysqli_num_rows($num);
+                            printf("There is %d reservation.\n",$rowcount);
+                            // Free result set
+                            mysqli_free_result($num);
+                        }
+                        ?>
+                    </p>
                 </div>
-                <div style="padding-right: 340px;margin-left: 360px;margin-top: 30px" class="form-floating mb-3" >
-                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                    <label for="floatingInput">Email address</label>
+                <div class="col-2" style="padding-top: 30px; margin-left: 100px" align="center">
                 </div>
-                <div style="padding-right: 340px;margin-left: 360px;margin-top: 10px" class="form-floating">
-                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                    <label for="floatingPassword">Password</label>
-                </div>
-                <div style="padding-top: 20px;margin-left: 430px">
-                    <a href="dashboard.html">
-                        <button type="button" class="btn btn-outline-primary">Login</button>
-                    </a>
-                </div>
+                <div class="col-2" style="padding-top: 30px; margin-left: 100px" align="center">
+            </div>
+
+            <div class="row" style="padding-top: 30px;overflow:auto;overflow-x:hidden;max-height: 300px">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th scope="col">Customer Name</th>
+                        <th scope="col">Customer Surname</th>
+                        <th scope="col">Check-in</th>
+                        <th scope="col">Check-out</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Door Number</th>
+                        <th scope="col">Room Type</th>
+                        <th scope="col">Total Price</th>
+                    </tr>
+                    </thead>
+                    <?php
+                    //for view
+                    $get = " SELECT * FROM reservation JOIN room ON reservation.doornumber = room.doornumber JOIN user ON user.email = user.email ";
+                    $result = mysqli_query($db,$get);
+
+                    while($row=mysqli_fetch_assoc($result))
+                    {
+                        $name = $row['name'];
+                        $surname = $row['surname'];
+                        $checkin = $row['checkin'];
+                        $checkout = $row['checkout'];
+                        $email = $row['email'];
+                        $phone = $row['phone'];
+                        $doornumber = $row['doornumber'];
+                        $roomtype = $row['roomtype'];
+                        $totprice = $row['totprice'];
+                        ?>
+                        <tr>
+                            <td><?php echo $name ?></td>
+                            <td><?php echo $surname ?></td>
+                            <td><?php echo $checkin ?></td>
+                            <td><?php echo $checkout ?></td>
+                            <td><?php echo $email ?></td>
+                            <td><?php echo $phone ?></td>
+                            <td><?php echo $doornumber ?></td>
+                            <td><?php echo $roomtype ?></td>
+                            <td><?php echo $totprice ?></td>
+                        </tr>
+                        <?php
+                    }
+                    ?>
+                </table>
             </div>
         </div>
+
     </div>
 </div>
 </div>
+
+
 
 </body>
 </html>

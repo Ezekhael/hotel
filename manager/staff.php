@@ -103,21 +103,21 @@ if(isset($_POST['submit'])){
                                                 <i class="bi bi-house-fill"></i>    Rooms</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="customers.html" class="list-group-item list-group-item-action bg-light" style="color:black">
+                                            <a href="customers.php" class="list-group-item list-group-item-action bg-light" style="color:black">
                                                 <i class="bi bi-person"></i>    Customers</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="reservations.html" class="list-group-item list-group-item-action bg-light" style="color:black"style="color:black">
+                                            <a href="reservations.php" class="list-group-item list-group-item-action bg-light" style="color:black" style="color:black">
                                                 <i class="bi bi-receipt"></i>    Reservations</a>
                                         </li>
                                     </ul>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="reports.html" class="list-group-item list-group-item-action bg-light" style="color:black">
+                                    <a href="reports.php" class="list-group-item list-group-item-action bg-light" style="color:black">
                                         <i class="bi bi-book"></i>    Reports</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="comments.html" class="list-group-item list-group-item-action bg-light" style="color:black">
+                                    <a href="comments.php" class="list-group-item list-group-item-action bg-light" style="color:black">
                                         <i class="bi bi-chat-left-text"></i>    Comments</a>
                                 </li>
 
