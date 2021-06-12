@@ -1,3 +1,7 @@
+<?php
+session_start();
+include("server.php");
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -16,70 +20,54 @@
     include("header.php");
     ?>
 </header>
-<div style="padding-left: 30px">
+<div class="container" style="padding: 20px;border: 1px solid;margin: 21px;padding-top:100px">
+<div class="col" >
+    <?php
 
-</div>
-<div style="padding: 20px;border: 1px solid;margin: 21px">
-    <div class="row">
-        <div class="col-4">
-            <div class="row" style="padding-right:300px;padding-top: 120px;margin-left: 60px">
-                <label for="dateInp1" class="form-label">Check-in Date</label>
-                <input type="date" class="form-control" id="dateInp1" placeholder="15.06.2021">
+
+$_SESSION['checkin'] = $_POST['checkin'];
+$_SESSION['checkout'] = $_POST['checkout'];
+$_SESSION['roomtype'] = $_POST['roomtype'];
+
+$select = "SELECT * FROM room WHERE roomstatus = 'Empty' and roomtype='".$_SESSION['roomtype']."'";
+$result= $db->query($select);
+
+    echo($db -> error);
+while($room = $result->fetch_assoc()) {
+
+
+?>
+    <div class="row align-items-center" style="border:1px solid;margin-top:5px;margin-bottom:5px;padding-top:30px;padding-bottom:30px">
+        <div class="col">
+            <img width="200px" height="180px" src="hotel%20room.jpg">
+        </div>
+        <div class="col">
+            <div class="row">
+             <p>
+                 <?php echo $room['roomtype'] ?> Room
+             </p>
             </div>
-            <div class="row" style="padding: 60px" >
-                <p style="font-size:24px">VIP Room</p>
-                <img width="100px" height="250px" src="hotel%20room.jpg">
-            </div>
-            <div class="row" style="padding: 60px" >
-                <p style="font-size:24px">Family Room</p>
-                <img width="100px" height="250px" src="hotel%20room.jpg">
+            <div class="row">
+                <p>
+                    <?php echo $room['doornumber'] ?>
+                </p>
             </div>
         </div>
-        <div class="col-4">
-        <div class="row" style="padding-right:370px;padding-top: 120px">
-                <label for="dateInp2" class="form-label">Check-out Date</label>
-                <input type="date" class="form-control" id="dateInp2" placeholder="20.06.2021">
-            </div>
-            <div class="row" style="padding-top:220px;padding-right:95px;">
-                <p style="font-size:20px">1000TRY/Day</p>
-                <a href="booking.php">
-                    <button type="button" class="btn btn-dark ">Book Now</button>
-                </a>
-            </div>
-            <div class="row" style="padding-top:220px;padding-right:95px;margin-top:130px">
-                <p style="font-size:20px">700TRY/Day</p>
-                <a href="booking.php">
-                    <button type="button" class="btn btn-dark ">Book Now</button>
-                </a>
-            </div>
-
+        <div class="col">
+            <form action="booking.php" method="POST">
+            <a href="search.php">
+                <input type="hidden" name="doornumber" value="<?php echo $room['doornumber'] ?>">
+                <button type="submit" name="sub" class="btn btn-dark ">Book Now</button>
+            </a>
+            </form>
         </div>
-        <div class="col-4">
-            <div class="row" style="padding-top:145px">
-
-                <a href="search.php">
-                    <button type="button" class="btn btn-primary ">Search</button>
-                </a>
-            </div>
-        </div>
-
-
     </div>
+<?php
+}
+?>
+</div>
 
 </div>
 </body>
 </html>
-<?php/*
 
-$_SESSION['checkin'] = $_POST['checkin'];
-$_SESSION['checkout'] = $_POST['checkout'];
-$_SESSION['numofcustomers'] = $_POST['numofcustomers'];
-
-$selectSql = "SELECT * FROM 'room' WHERE status = 'Empty'";
-$resultSql= $db->query($selectSql);
-
-
-while($room = $resultSql->fetch_assoc()) {
-}
-?>
-*/

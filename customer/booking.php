@@ -25,12 +25,59 @@ include("server.php");
 </div>
 <?php
 $name = $surname = $email = $phone = "";
+$totprice = calc($_SESSION["checkin"], $_SESSION["checkout"], $_SESSION["roomtype"]);
+if(isset($_POST['sub'])){
+    $_SESSION['doornumber'] = $_POST['doornumber'];
+}
 if(isset($_SESSION['email'])) {
     $name = $_SESSION['name'];
     $surname = $_SESSION['surname'];
     $email = $_SESSION['email'];
     $phone = $_SESSION['phone'];
+
 }
+?>
+<?php
+if(isset($_POST['submit'])) {
+
+    if (!empty($_SESSION['name']) && !empty($_SESSION['surname']) && !empty($_SESSION['email']) && !empty($_SESSION['phone'])) {
+
+
+        $add = $db->query("INSERT INTO reservation(checkin, checkout,email, doornumber, totprice) 
+                VALUES ('" . $_SESSION['checkin'] . "','" . $_SESSION['checkout'] . "','" . $_SESSION['email'] . "','" . $_SESSION["doornumber"] . "','".$totprice."')");
+
+        if($add){
+            $add = $db->query("UPDATE room SET roomstatus = 'Full' where doornumber='".$_SESSION["doornumber"]."'");
+
+            header("Location:reservations.php");
+        }
+        else{
+            echo "Reservation could not be created successfully";
+            echo $db->error;
+        }
+    }
+}
+
+?>
+<?php
+function calc($checkin, $checkout, $roomtype){
+    include("server.php");
+
+    $select = $db -> query("SELECT * FROM roomprice"
+        ." WHERE roomtype = '".$roomtype."'");
+
+    $price = $select -> fetch_assoc();
+
+    $date1 = date_create("$checkout");
+    $date2 = date_create("$checkin");
+
+    $diff = date_diff($date1, $date2);
+
+    return $diff->format('%d') * $price['price'];
+}
+
+
+
 ?>
 <div style="padding-left: 30px">
     <div style="padding-top: 25px">
@@ -38,18 +85,20 @@ if(isset($_SESSION['email'])) {
         Customer Informations
     </h3>
     </div>
+    <form action="booking.php" method="POST">
     <div class="row" style="padding-right: 800px">
+
     <div class="col-4">
         <div class="row" style="padding-right: 100px;padding-top: 30px">
             <div class="mb-3">
                 <label  class="form-label">Name</label>
-                <input type="text" class="form-control" value="<?php echo $name?>">
+                <input type="text" name="name" class="form-control" value="<?php echo $name?>">
             </div>
         </div>
         <div class="row" style="padding-right: 100px;padding-top: 30px">
             <div class="mb-3">
                 <label  class="form-label">Surname</label>
-                <input type="text" class="form-control" value="<?php echo $surname?>">
+                <input type="text" name="surname" class="form-control" value="<?php echo $surname?>">
             </div>
         </div>
         <div class="row" style="padding-right: 100px;padding-top: 30px">
@@ -60,7 +109,7 @@ if(isset($_SESSION['email'])) {
         </div>
         <div class="row" style="padding-right: 100px;padding-top: 30px">
             <div class="mb-3">
-                <label  class="form-label">Date</label>
+                <label  class="form-label">Card Date</label>
                 <input type="month" class="form-control" placeholder="xx/xx">
             </div>
         </div>
@@ -69,13 +118,13 @@ if(isset($_SESSION['email'])) {
         <div class="row" style="padding-right: 100px;padding-top: 30px">
             <div class="mb-3">
                 <label  class="form-label">Phone Number</label>
-                <input type="phone" class="form-control" value="<?php echo $phone?>">
+                <input type="phone" name="phone" class="form-control" value="<?php echo $phone?>">
             </div>
         </div>
         <div class="row" style="padding-right: 100px;padding-top: 30px">
             <div class="mb-3">
                 <label  class="form-label">E-mail</label>
-                <input type="email" class="form-control" value="<?php echo $email?>">
+                <input type="email" name="email" class="form-control" value="<?php echo $email?>">
             </div>
         </div>
         <div class="row" style="padding-right: 100px;padding-top: 30px">
@@ -117,19 +166,19 @@ if(isset($_SESSION['email'])) {
                 <tbody>
                 <tr>
                     <th scope="row">Check-in Date</th>
-                    <td>2021-06-15</td>
+                    <td><?php echo $_SESSION["checkin"] ?></td>
                 </tr>
                 <tr>
                     <th scope="row">Check-out Date</th>
-                    <td>2021-06-20</td>
+                    <td><?php echo $_SESSION["checkout"] ?></td>
                 </tr>
                 <tr>
                     <th scope="row">Room Type</th>
-                    <td colspan="2">VIP Room</td>
+                    <td colspan="2"><?php echo $_SESSION["roomtype"] ?></td>
                 </tr>
                 <tr>
                     <th scope="row">Price</th>
-                    <td colspan="2">5000 TRY</td>
+                    <td colspan="2"><?php echo $totprice ?></td>
                 </tr>
                 </tbody>
             </table>
@@ -152,15 +201,20 @@ if(isset($_SESSION['email'])) {
                             Do you want to continue?
                         </div>
                         <div class="modal-footer">
+
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <a class="btn btn-primary" href="reservations.php" role="button">Continue</a>
+                            <input type="submit" name="submit" class="btn btn-primary" role="button" value="Continue"/>
+
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 </div>
+    </form>
 </div>
 </body>
 </html>

@@ -45,96 +45,68 @@ if(!isset($_SESSION["email"])) {
                 <a href="review.php" class="list-group-item list-group-item-action">Reviews</a>
             </div>
         </div>
-        <div class="col-6" style="padding-right: 500px">
+        <div class="col-6" style="padding-right: 100px">
             <div class="col"  style="border: 1px solid;overflow:auto;overflow-x:hidden; height:500px;padding: 10px">
-                <div class = "row">
-                    <div class="col-5">
-                        <img src="hotel%20room.jpg" width="160px" height="200px">
-                    </div>
+                <?php
+
+                $select = "SELECT * FROM reservation JOIN room ON reservation.doornumber = room.doornumber WHERE email='".$_SESSION['email']."'";
+                $result= $db->query($select);
+
+                echo($db -> error);
+                while($room = $result->fetch_assoc()) {
+
+
+                ?>
+                <div class = "row" style ="margin-top:15px">
+
                     <div class="col-7">
-                        <table class="table table-striped">
+                        <table class="table table-bordered">
                             <thead>
                             <tr>
-                                <th scope="col">Details</th>
-                                <th scope="col"></th>
+                                <th scope="col">Check-In</th>
+                                <th scope="col">Check-Out</th>
+                                <th scope="col">Door Number</th>
+                                <th scope="col">Room Type</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Edit</th>
+                                <th scope="col">Delete</th>
                             </tr>
                             </thead>
-                            <tbody>
-                            <tr>
-                                <th scope="row">Check-in Date</th>
-                                <td>2021-06-15</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Check-out Date</th>
-                                <td>2021-06-20</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Room Type</th>
-                                <td colspan="2">VIP Room</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Price</th>
-                                <td colspan="2">5000 TRY</td>
-                            </tr>
-                            </tbody>
+                            <?php
+                            //for view
+                            $get = " SELECT * FROM reservation JOIN room ON reservation.doornumber=room.doornumber ";
+                            $result = mysqli_query($db,$get);
+
+                            while($row=mysqli_fetch_assoc($result))
+                            {
+                                $checkin = $row['checkin'];
+                                $checkout = $row['checkout'];
+                                $doornumber = $row['doornumber'];
+                                $roomtype = $row['roomtype'];
+                                $totprice = $row['totprice'];
+
+                                ?>
+                                <tr>
+                                    <td><?php echo $checkin ?></td>
+                                    <td><?php echo $checkout ?></td>
+                                    <td><?php echo $doornumber ?></td>
+                                    <td><?php echo $roomtype ?></td>
+                                    <td><?php echo $totprice ?></td>
+                                    <td><a href="editreservation.php?GetID=<?php echo $doornumber ?>">Edit</a></td>
+                                    <td><a href="deletereservation.php?Del=<?php echo $doornumber ?>">Delete</a></td>
+                                </tr>
+                                <?php
+                            }
+                            ?>
                         </table>
                     </div>
-                    <!-- Button trigger modal -->
-                    <div class="row">
-                    <div class="col-3">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        Extend
-                    </button>
-
-                    <!-- Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Warning!</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <label for="dateInp2" class="form-label">New Check-out Date</label>
-                                    <input type="date" class="form-control" id="dateInp2">
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <a class="btn btn-primary" href="reservations2.php" role="button">Extend </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-                        <div class="col">
-                            <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                                Cancel
-                            </button>
-
-                            <!-- Modal -->
-                            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="staticBackdropLabel">Warning!</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            Do you want to cancel your reservation?
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <a class="btn btn-primary" href="reservations3.php" role="button">Continue</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
+                    <?php
+                }
+                ?>
             </div>
         </div>
+
     </div>
 
 </div>

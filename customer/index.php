@@ -23,6 +23,7 @@ include("server.php");
 <div style="padding-left: 30px">
 
 </div>
+<form method="post" action="search.php";>
 <div style="padding: 20px;border: 1px solid;margin: 21px">
     <div class="row">
     <div class="col-2">
@@ -99,34 +100,36 @@ include("server.php");
                 </div>
             </div>
         </div>
+
         <div class="col-3" align="center">
             <div class="row" style="padding-right:230px;padding-top: 120px">
                 <label for="dateInp1" class="form-label">Check-in Date</label>
-                <input type="date" class="form-control" id="dateInp1">
+                <input type="date" name="checkin" class="form-control" id="dateInp1">
             </div>
         </div>
         <div class="col-3" align="center">
             <div class="row" style="padding-right:230px;padding-top: 120px">
                 <label for="dateInp2" class="form-label">Check-out Date</label>
-                <input type="date" class="form-control" id="dateInp2">
+                <input type="date" name="checkout" class="form-control" id="dateInp2">
             </div>
             <div class="row" style="padding-top:120px;padding-right: 230px">
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Select Number of Person</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
+                <select class="form-select" name="roomtype" aria-label="Default select example">
+                    <option selected>Select Room Type</option>
+                    <option value="VIP">VIP Room</option>
+                    <option value="Family">Family Room</option>
+                    <option value="Double">Double Room</option>
+                    <option value="Single">Single Room</option>
                 </select>
             </div>
             <div class="row" style="padding-top:220px;padding-right:95px">
                 <a href="search.php">
-                    <button type="button" class="btn btn-dark ">Book Now</button>
+                    <button type="subimt" name="submit" class="btn btn-dark ">Book Now</button>
                 </a>
             </div>
         </div>
-    </div>
 
+    </div>
+</form>
 </div>
 </body>
 </html>
