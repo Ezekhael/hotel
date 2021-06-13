@@ -51,7 +51,7 @@ include("server.php");
 
                             <ul class="no-bullets">
                                 <li class="nav-item" >
-                                    <a href="dashboard.html" class="list-group-item list-group-item-action bg-light" style="color:black">
+                                    <a href="dashboard.php" class="list-group-item list-group-item-action bg-light" style="color:black">
                                         <i class="bi bi-bar-chart"></i>    Dashboard</a>
                                 </li>
                                 <li class="nav-item">

@@ -1,3 +1,7 @@
+<?php
+session_start();
+include("server.php");
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -47,7 +51,7 @@
 
                             <ul class="no-bullets">
                                 <li class="nav-item" >
-                                    <a href="dashboard.html" class="list-group-item list-group-item-action bg-light active"  style="color:black">
+                                    <a href="dashboard.php" class="list-group-item list-group-item-action bg-light active" style="color:black">
                                         <i class="bi bi-bar-chart"></i>    Dashboard</a>
                                 </li>
                                 <li class="nav-item">
@@ -99,7 +103,7 @@
                 Revenue
             </h4>
             <p>
-                25000 USD
+                6400
             </p>
         </div>
         <div class="col-2" style="border: 1px solid;padding-top: 100px; margin-left: 20px;height:300px" align="center">
@@ -108,7 +112,7 @@
                 Expense
             </h4>
             <p>
-                5000 USD
+                2000
             </p>
         </div>
         <div class="col-2" style="border: 1px solid;padding-top: 100px; margin-left: 20px;height:300px" align="center">
@@ -117,7 +121,19 @@
                 Customers
             </h4>
             <p>
-                400
+                <?php
+
+                $sql="SELECT email FROM user";
+
+                if ($num=mysqli_query($db,$sql))
+                {
+                    // Return the number of rows in result set
+                    $rowcount=mysqli_num_rows($num);
+                    printf(" %d \n",$rowcount);
+                    // Free result set
+                    mysqli_free_result($num);
+                }
+                ?>
             </p>
         </div>
         <div class="col-2" style="border: 1px solid;padding-top: 100px; margin-left: 20px;height:300px" align="center">
@@ -126,7 +142,19 @@
                 Rooms
             </h4>
             <p>
-                250
+                <?php
+
+                $sql="SELECT doornumber FROM room";
+
+                if ($num=mysqli_query($db,$sql))
+                {
+                    // Return the number of rows in result set
+                    $rowcount=mysqli_num_rows($num);
+                    printf(" %d \n",$rowcount);
+                    // Free result set
+                    mysqli_free_result($num);
+                }
+                ?>
             </p>
         </div>
     </div>
