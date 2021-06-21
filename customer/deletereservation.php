@@ -10,7 +10,7 @@ if(isset($_GET['Del']))
     $result = mysqli_query($db,$query);
     if($result)
     {
-        $add = $db->query("UPDATE room SET roomstatus = 'Empty' where doornumber='".$_SESSION["doornumber"]."'");
+        $add = $db->query("UPDATE room SET roomstatus = 'Empty' where doornumber='".$doornumber."'");
         header("location:reservations.php");
     }
     else
