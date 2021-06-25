@@ -120,6 +120,10 @@ if(isset($_POST['submit'])){
                                     <a href="comments.php" class="list-group-item list-group-item-action bg-light" style="color:black">
                                         <i class="bi bi-chat-left-text"></i>    Comments</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="messages.php" class="list-group-item list-group-item-action bg-light" style="color:black">
+                                        <i class="bi bi-chat-left-text"></i>    Messages</a>
+                                </li>
 
                             </ul>
                     </div>

@@ -41,10 +41,10 @@ if(!isset($_SESSION["email"])) {
                 <a href="accountdetails.php" class="list-group-item list-group-item-action">Account Details</a>
                 <a href="change%20password.php" class="list-group-item list-group-item-action">Change Password</a>
                 <a href="reservations.php" class="list-group-item list-group-item-action">Reservations</a>
-                <a href="review.php" class="list-group-item list-group-item-action active" aria-current="true">
+                <a href="review.php" class="list-group-item list-group-item-action" aria-current="true">
                     Reviews
                 </a>
-                <a href="mymessages.php" class="list-group-item list-group-item-action">Messages</a>
+                <a href="mymessages.php" class="list-group-item list-group-item-action active">Messages</a>
             </div>
         </div>
         <div class="col-6" style="padding-right: 500px">
@@ -53,23 +53,23 @@ if(!isset($_SESSION["email"])) {
             <div class="col"  style="border: 1px solid;overflow:auto;overflow-x:hidden; height:500px;padding: 10px">
                 <div class="row" style="border: 1px solid">
                     <?php
-                    $select = "SELECT * FROM comment WHERE email = '".$_SESSION["email"]."'";
+                    $select = "SELECT * FROM message WHERE email = '".$_SESSION["email"]."'";
                     $result = $db->query($select);
-                    while($comment = $result -> fetch_assoc()){
+                    while($message = $result -> fetch_assoc()){
 
 
-                    ?>
-                 <div class="row" style="border: 1px solid">
-                    <p>
-                        <?php echo $comment['comment']; ?>
-                    </p>
-                 </div>
-                    <?php
+                        ?>
+                        <div class="row" style="border: 1px solid">
+                            <p>
+                                <?php echo $message['message']; ?>
+                            </p>
+                        </div>
+                        <?php
                     }
                     ?>
-                   <div class="row">
-                   </div>
-               </div>
+                    <div class="row">
+                    </div>
+                </div>
             </div>
         </div>
     </div>

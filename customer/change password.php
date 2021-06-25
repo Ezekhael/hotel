@@ -44,6 +44,7 @@ if(!isset($_SESSION["email"])) {
                 </a>
                 <a href="reservations.php" class="list-group-item list-group-item-action">Reservations</a>
                 <a href="review.php" class="list-group-item list-group-item-action">Reviews</a>
+                <a href="mymessages.php" class="list-group-item list-group-item-action">Messages</a>
             </div>
         </div>
         <div class="column-6" style="padding-top: 20px;width:800px">

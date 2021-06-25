@@ -87,13 +87,14 @@ include("server.php");
                                         <i class="bi bi-book"></i>    Reports</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="comments.php" class="list-group-item list-group-item-action bg-light active" style="color:black">
+                                    <a href="comments.php" class="list-group-item list-group-item-action bg-light" style="color:black">
                                         <i class="bi bi-chat-left-text"></i>    Comments</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="messages.php" class="list-group-item list-group-item-action bg-light" style="color:black">
+                                    <a href="messages.php" class="list-group-item list-group-item-action bg-light active" style="color:black">
                                         <i class="bi bi-chat-left-text"></i>    Messages</a>
                                 </li>
+
                             </ul>
                     </div>
 
@@ -103,12 +104,12 @@ include("server.php");
         <div class="col-6">
             <div class="col" align="center" style="padding-top: 10px">
                 <h4>
-                    Number of Comments
+                    Number of messages
                 </h4>
                 <p>
                     <?php
 
-                    $sql="SELECT id FROM comment";
+                    $sql="SELECT messageid FROM message";
 
                     if ($num=mysqli_query($db,$sql))
                     {
@@ -123,35 +124,35 @@ include("server.php");
             </div>
             <div class="col"  style="border: 1px solid;overflow:auto;overflow-x:hidden; height:500px;padding: 10px">
                 <div class="row" style="border: 1px solid">
-                <?php
-                $select = "SELECT * FROM comment JOIN user ON comment.email = user.email ";
-                $result = mysqli_query($db,$select);
-
-                while($row=mysqli_fetch_assoc($result)) {
-
-                    $comment = $row['comment'];
-                    $name = $row['name'];
-                    $surname = $row['surname'];
-
-                    ?>
-                    <div class="row" style="border: 1px solid">
-                        <p>
-                            <?php echo $comment; ?>
-                        </p>
-                        <p>
-                            <?php echo $name; ?>
-                            <?php echo $surname; ?>
-                        </p>
-                    </div>
                     <?php
-                }
-                ?>
+                    $select = "SELECT * FROM message JOIN user ON message.email = user.email ";
+                    $result = mysqli_query($db,$select);
+
+                    while($row=mysqli_fetch_assoc($result)) {
+
+                        $message = $row['message'];
+                        $name = $row['name'];
+                        $surname = $row['surname'];
+
+                        ?>
+                        <div class="row" style="border: 1px solid">
+                            <p>
+                                <?php echo $message; ?>
+                            </p>
+                            <p>
+                                <?php echo $name; ?>
+                                <?php echo $surname; ?>
+                            </p>
+                        </div>
+                        <?php
+                    }
+                    ?>
                     <div class="row">
+                    </div>
+                </div>
             </div>
         </div>
-        </div>
     </div>
-</div>
 
 </body>
 </html>

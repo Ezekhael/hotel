@@ -78,6 +78,7 @@ if(!isset($_SESSION["email"])) {
                 <a href="change%20password.php" class="list-group-item list-group-item-action">Change Password</a>
                 <a href="reservations.php" class="list-group-item list-group-item-action">Reservations</a>
                 <a href="review.php" class="list-group-item list-group-item-action">Reviews</a>
+                <a href="mymessages.php" class="list-group-item list-group-item-action">Messages</a>
             </div>
         </div>
 

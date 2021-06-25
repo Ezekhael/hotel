@@ -21,6 +21,9 @@
                 <a class="nav-link" href="allcomments.php">Comments</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="message.php">Message</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="login.php">Login</a>
             </li>
             <li class="nav-item">
