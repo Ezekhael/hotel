@@ -43,11 +43,11 @@ if(isset($_POST['submit'])) {
     if (!empty($_SESSION['name']) && !empty($_SESSION['surname']) && !empty($_SESSION['email']) && !empty($_SESSION['phone'])) {
 
 
-        $add = $db->query("INSERT INTO reservation(checkin, checkout,email, doornumber, totprice) 
-                VALUES ('" . $_SESSION['checkin'] . "','" . $_SESSION['checkout'] . "','" . $_SESSION['email'] . "','" . $_SESSION["doornumber"] . "','".$totprice."')");
-
+        $add = $db->query("INSERT INTO reservation(checkin, checkout,email, doornumber, totprice, status) 
+                VALUES ('" . $_SESSION['checkin'] . "','" . $_SESSION['checkout'] . "','" . $_SESSION['email'] . "','" . $_SESSION["doornumber"] . "','".$totprice."','active')");
+        echo $db->error;
         if($add){
-            $add = $db->query("UPDATE room SET roomstatus = 'Full' where doornumber='".$_SESSION["doornumber"]."'");
+            //$add = $db->query("UPDATE room SET roomstatus = 'Full' where doornumber='".$_SESSION["doornumber"]."'");
 
             header("Location:reservations.php");
         }
@@ -79,7 +79,7 @@ function calc($checkin, $checkout, $roomtype){
 
 
 ?>
-<div style="padding-left: 30px">
+<div style="padding-left: 30px;margin-top: 30px">
     <div style="padding-top: 25px">
     <h3>
         Customer Informations

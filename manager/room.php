@@ -206,7 +206,6 @@ if(isset($_POST['submit'])){
                         <th scope="col">Door Number</th>
                         <th scope="col">Floor Number</th>
                         <th scope="col">Room Type</th>
-                        <th scope="col">Room Status</th>
                         <th scope="col">Edit</th>
                         <th scope="col">Delete</th>
                     </tr>
@@ -221,14 +220,12 @@ if(isset($_POST['submit'])){
                         $doornumber = $row['doornumber'];
                         $floornumber = $row['floornumber'];
                         $roomtype = $row['roomtype'];
-                        $roomstatus = $row['roomstatus'];
 
                         ?>
                         <tr>
                             <td><?php echo $doornumber ?></td>
                             <td><?php echo $floornumber ?></td>
                             <td><?php echo $roomtype ?></td>
-                            <td><?php echo $roomstatus ?></td>
                             <td><a href="editroom.php?GetID=<?php echo $doornumber ?>">Edit</a></td>
                             <td><a href="deleteroom.php?Del=<?php echo $doornumber ?>">Delete</a></td>
                         </tr>

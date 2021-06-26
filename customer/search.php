@@ -21,53 +21,65 @@ include("server.php");
     ?>
 </header>
 <div class="container" style="padding: 20px;border: 1px solid;margin: 21px;padding-top:100px">
-<div class="col" >
-    <?php
+    <div class="col" >
+        <?php
 
 
-$_SESSION['checkin'] = $_POST['checkin'];
-$_SESSION['checkout'] = $_POST['checkout'];
-$_SESSION['roomtype'] = $_POST['roomtype'];
+        $_SESSION['checkin'] = $_POST['checkin'];
+        $_SESSION['checkout'] = $_POST['checkout'];
+        $_SESSION['roomtype'] = $_POST['roomtype'];
 
-$select = "SELECT * FROM room WHERE roomstatus = 'Empty' and roomtype='".$_SESSION['roomtype']."'";
-$result= $db->query($select);
+        $checkin = $_SESSION['checkin'];
+        $checkout = $_SESSION['checkout'];
+        $roomtype = $_SESSION['roomtype'];
 
-    echo($db -> error);
-while($room = $result->fetch_assoc()) {
+        $select = "SELECT * FROM room 
+              WHERE roomtype = '$roomtype' AND doornumber NOT IN
+            (SELECT ro.doornumber 
+            FROM reservation res JOIN room ro ON res.doornumber = ro.doornumber
+            WHERE res.status = 'active' AND
+            ((res.checkin BETWEEN '$checkin' AND '$checkout') OR
+             (res.checkout BETWEEN '$checkin' AND '$checkout') OR
+             (res.checkin < '$checkin' AND res.checkout > '$checkout')))";
 
 
-?>
-    <div class="row align-items-center" style="border:1px solid;margin-top:5px;margin-bottom:5px;padding-top:30px;padding-bottom:30px">
-        <div class="col">
-            <img width="200px" height="180px" src="hotel%20room.jpg">
-        </div>
-        <div class="col">
-            <div class="row">
-             <p>
-                 <?php echo $room['roomtype'] ?> Room
-             </p>
+        $result= $db->query($select);
+
+        echo($db -> error);
+        while($room = $result->fetch_assoc()) {
+
+
+            ?>
+            <div class="row align-items-center" style="border:1px solid;margin-top:5px;margin-bottom:5px;padding-top:30px;padding-bottom:30px">
+                <div class="col">
+                    <img width="200px" height="180px" src="hotel%20room.jpg">
+                </div>
+                <div class="col">
+                    <div class="row">
+                        <p>
+                            <?php echo $room['roomtype'] ?> Room
+                        </p>
+                    </div>
+                    <div class="row">
+                        <p>
+                            <?php echo $room['doornumber'] ?>
+                        </p>
+                    </div>
+                </div>
+                <div class="col">
+                    <form action="booking.php" method="POST">
+                        <a href="search.php">
+                            <input type="hidden" name="doornumber" value="<?php echo $room['doornumber'] ?>">
+                            <button type="submit" name="sub" class="btn btn-dark ">Book Now</button>
+                        </a>
+                    </form>
+                </div>
             </div>
-            <div class="row">
-                <p>
-                    <?php echo $room['doornumber'] ?>
-                </p>
-            </div>
-        </div>
-        <div class="col">
-            <form action="booking.php" method="POST">
-            <a href="search.php">
-                <input type="hidden" name="doornumber" value="<?php echo $room['doornumber'] ?>">
-                <button type="submit" name="sub" class="btn btn-dark ">Book Now</button>
-            </a>
-            </form>
-        </div>
+            <?php
+        }
+        ?>
     </div>
-<?php
-}
-?>
-</div>
 
 </div>
 </body>
 </html>
-

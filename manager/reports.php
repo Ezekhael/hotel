@@ -9,7 +9,7 @@ if(isset($_POST['submit'])){
 
         $startdate = $_POST['startdate'];
         $enddate = $_POST['enddate'];
-        $revenue = $db->query("SELECT SUM(totprice) AS totprice FROM reservation WHERE checkin BETWEEN '$startdate' and '$enddate'")->fetch_assoc()["totprice"];
+        $revenue = $db->query("SELECT SUM(totprice) AS totprice FROM reservation WHERE status != 'Cancelled' and checkin BETWEEN '$startdate' and '$enddate'")->fetch_assoc()["totprice"];
         $expense = $db->query("SELECT SUM(salary) * (TIMESTAMPDIFF(MONTH, '$startdate','$enddate') + 1) AS salary FROM staff")->fetch_assoc()["salary"];
         $query = "INSERT INTO report(startdate,enddate,revenue,expense) values('$startdate','$enddate','$revenue','$expense')";
 

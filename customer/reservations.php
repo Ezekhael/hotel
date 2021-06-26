@@ -69,6 +69,7 @@ if(!isset($_SESSION["email"])) {
                                 <th scope="col">Door Number</th>
                                 <th scope="col">Room Type</th>
                                 <th scope="col">Price</th>
+                                <th scope="col">Status</th>
                                 <th scope="col">Extend</th>
                                 <th scope="col">Cancel</th>
                             </tr>
@@ -80,11 +81,13 @@ if(!isset($_SESSION["email"])) {
 
                             while($row=mysqli_fetch_assoc($result))
                             {
+                                $id = $row['id'];
                                 $checkin = $row['checkin'];
                                 $checkout = $row['checkout'];
                                 $doornumber = $row['doornumber'];
                                 $roomtype = $row['roomtype'];
                                 $totprice = $row['totprice'];
+                                $status = $row['status'];
 
                                 ?>
                                 <tr>
@@ -93,8 +96,9 @@ if(!isset($_SESSION["email"])) {
                                     <td><?php echo $doornumber ?></td>
                                     <td><?php echo $roomtype ?></td>
                                     <td><?php echo $totprice ?></td>
-                                    <td><a href="editreservation.php?GetID=<?php echo $doornumber ?>&checkin=<?php echo $checkin?>">Extend</a></td>
-                                    <td><a href="deletereservation.php?Del=<?php echo $doornumber ?>">Cancel</a></td>
+                                    <td><?php echo $status ?></td>
+                                    <td><a <?php echo $status == 'Cancelled' ? "" :"href='editreservation.php?GetID=$id&roomtype=$roomtype'"?>> Extend</a></td>
+                                    <td><a <?php echo $status == "active" ? "href=deletereservation.php?Del=$id" : "#"?>>Cancel</a></td>
                                 </tr>
                                 <?php
                             }

@@ -128,60 +128,91 @@ include("server.php");
                 <div class="col-2" style="padding-top: 30px; margin-left: 100px" align="center">
                 </div>
                 <div class="col-2" style="padding-top: 30px; margin-left: 100px" align="center">
-            </div>
+                </div>
 
-            <div class="row" style="padding-top: 30px;overflow:auto;overflow-x:hidden;max-height: 300px">
-                <table class="table table-bordered">
-                    <thead>
-                    <tr>
-                        <th scope="col">Customer Name</th>
-                        <th scope="col">Customer Surname</th>
-                        <th scope="col">Check-in</th>
-                        <th scope="col">Check-out</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Phone</th>
-                        <th scope="col">Door Number</th>
-                        <th scope="col">Room Type</th>
-                        <th scope="col">Total Price</th>
-                    </tr>
-                    </thead>
-                    <?php
-                    //for view
-                    $get = " SELECT * FROM reservation JOIN room ON reservation.doornumber = room.doornumber JOIN user ON user.email = user.email ";
-                    $result = mysqli_query($db,$get);
-
-                    while($row=mysqli_fetch_assoc($result))
-                    {
-                        $name = $row['name'];
-                        $surname = $row['surname'];
-                        $checkin = $row['checkin'];
-                        $checkout = $row['checkout'];
-                        $email = $row['email'];
-                        $phone = $row['phone'];
-                        $doornumber = $row['doornumber'];
-                        $roomtype = $row['roomtype'];
-                        $totprice = $row['totprice'];
-                        ?>
+                <div class="row" style="padding-top: 30px;overflow:auto;overflow-x:hidden;max-height: 300px">
+                    <form action="reservations.php" method="post" style="padding-right:1200px">
+                        <div class="form-row" style="">
+                            <input type="date" class="form-control mb-2" placeholder=" Check-In " name="checkin" value="">
+                            <input type="date" class="form-control mb-2" placeholder=" Check-Out " name="checkout" value="">
+                            <button type="submit" button class="btn btn-primary" name="search">Search</button>
+                        </div>
+                    </form>
+                    <table class="table table-bordered">
+                        <thead>
                         <tr>
-                            <td><?php echo $name ?></td>
-                            <td><?php echo $surname ?></td>
-                            <td><?php echo $checkin ?></td>
-                            <td><?php echo $checkout ?></td>
-                            <td><?php echo $email ?></td>
-                            <td><?php echo $phone ?></td>
-                            <td><?php echo $doornumber ?></td>
-                            <td><?php echo $roomtype ?></td>
-                            <td><?php echo $totprice ?></td>
+                            <th scope="col">Reservation ID</th>
+                            <th scope="col">Customer Name</th>
+                            <th scope="col">Customer Surname</th>
+                            <th scope="col">Check-in</th>
+                            <th scope="col">Check-out</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Phone</th>
+                            <th scope="col">Door Number</th>
+                            <th scope="col">Room Type</th>
+                            <th scope="col">Room Status</th>
+                            <th scope="col">Total Price</th>
                         </tr>
+                        </thead>
                         <?php
-                    }
-                    ?>
-                </table>
-            </div>
-        </div>
 
+                        $get = "";
+
+                        if($_SERVER["REQUEST_METHOD"] == "POST") {
+                            if(isset($_POST["checkin"]) && isset($_POST["checkout"])) {
+                                $checkin = $_POST["checkin"];
+                                $checkout = $_POST["checkout"];
+
+                                $get = " SELECT * FROM reservation JOIN room ON reservation.doornumber = room.doornumber JOIN user ON user.email = user.email 
+                            WHERE checkin >= '$checkin' AND checkout <= '$checkout' ";
+                            }
+                            else{
+                                $get = " SELECT * FROM reservation JOIN room ON reservation.doornumber = room.doornumber JOIN user ON user.email = user.email ";
+                            }
+                        }
+                        else {
+                            $get = " SELECT * FROM reservation JOIN room ON reservation.doornumber = room.doornumber JOIN user ON user.email = user.email ";
+                        }
+
+                        //for view
+                        $result = mysqli_query($db,$get);
+
+                        while($row=mysqli_fetch_assoc($result))
+                        {
+                            $id = $row['id'];
+                            $name = $row['name'];
+                            $surname = $row['surname'];
+                            $checkin = $row['checkin'];
+                            $checkout = $row['checkout'];
+                            $email = $row['email'];
+                            $phone = $row['phone'];
+                            $doornumber = $row['doornumber'];
+                            $roomtype = $row['roomtype'];
+                            $status = $row['status'];
+                            $totprice = $row['totprice'];
+                            ?>
+                            <tr>
+                                <td><?php echo $id ?></td>
+                                <td><?php echo $name ?></td>
+                                <td><?php echo $surname ?></td>
+                                <td><?php echo $checkin ?></td>
+                                <td><?php echo $checkout ?></td>
+                                <td><?php echo $email ?></td>
+                                <td><?php echo $phone ?></td>
+                                <td><?php echo $doornumber ?></td>
+                                <td><?php echo $roomtype ?></td>
+                                <td><?php echo $status ?></td>
+                                <td><?php echo $totprice ?></td>
+                            </tr>
+                            <?php
+                        }
+                        ?>
+                    </table>
+                </div>
+            </div>
+
+        </div>
     </div>
-</div>
 </div>
 
 

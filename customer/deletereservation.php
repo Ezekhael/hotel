@@ -5,12 +5,11 @@ include("server.php");
 <?php
 if(isset($_GET['Del']))
 {
-    $doornumber = $_GET['Del'];
-    $query = " delete from reservation where doornumber = '".$doornumber."'";
+    $id = $_GET['Del'];
+    $query = " update reservation set status = 'Cancelled' where id = '".$id."'";
     $result = mysqli_query($db,$query);
     if($result)
     {
-        $add = $db->query("UPDATE room SET roomstatus = 'Empty' where doornumber='".$doornumber."'");
         header("location:reservations.php");
     }
     else

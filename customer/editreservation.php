@@ -3,9 +3,9 @@ session_start();
 include("server.php");
 ?>
 <?php
-$doornumber = $_GET['GetID'];
-$checkin = $_GET['checkin'];
-$query = " select * from reservation JOIN room ON reservation.doornumber= room.doornumber where reservation.doornumber='".$doornumber."' and reservation.checkin='".$checkin."' ";
+$id = $_GET['GetID'];
+$roomtype =$_GET['roomtype'];
+$query = " select * from reservation where id='".$id."'";
 $result = mysqli_query($db,$query);
 echo $db->error;
 
@@ -14,7 +14,8 @@ while($row=mysqli_fetch_assoc($result))
     $checkin = $row['checkin'];
     $checkout = $row['checkout'];
     $totprice = $row['totprice'];
-    $roomtype = $row['roomtype'];
+    //$roomtype = $row['roomtype'];
+    echo $db->error;
 }
 
 ?>
@@ -58,7 +59,7 @@ function calc($checkin, $checkout, $roomtype){
                 </div>
                 <div class="card-body">
 
-                    <form action="editreservation.php?GetID=<?php echo $doornumber ?>&checkin=<?php echo $checkin?>" method="post">
+                    <form action="editreservation.php?GetID=<?php echo $id ?>&roomtype=<?php echo $roomtype ?>" method="post">
                         <input type="date" class="form-control mb-2" placeholder=" Check-Out " name="checkout" value="<?php echo $checkout ?>">
                         <button type="submit" button class="btn btn-primary" name="update">Update</button>
                     </form>
@@ -72,7 +73,7 @@ function calc($checkin, $checkout, $roomtype){
 
 if(isset($_POST['update']))
 {
-    $update = " update reservation set checkout='".$_POST['checkout']."' where doornumber='".$doornumber."' and checkin='".$checkin."'";
+    $update = " update reservation set checkout='".$_POST['checkout']."' where id='".$id."'";
 
     $res = mysqli_query($db,$update);
 
@@ -80,8 +81,7 @@ if(isset($_POST['update']))
     if($res)
     {
         $totprice = calc($checkin,$_POST['checkout'], $roomtype);
-        $changetot = $db->query("UPDATE reservation SET totprice = '".$totprice."' where doornumber='".$doornumber."' and checkin='".$checkin."'");
-        echo $db->error;
+        $changetot = $db->query("UPDATE reservation SET totprice = '".$totprice."' where id='".$id."'");
         header("location:reservations.php");
     }
     else
